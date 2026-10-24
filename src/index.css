@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Nastaliq+Urdu:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bn-cream: #F4F4F8;
+  --color-bn-dark: #0B0A14;
+  --color-bn-darker: #06050C;
+  --color-bn-purple: #8B5CF6;
+  --color-bn-purpleDark: #6D28D9;
+  --color-bn-purpleLight: #C4B5FD;
+  --color-bn-purpleGlow: rgba(139, 92, 246, 0.35);
+  --color-bn-silver: #E2E8F0;
+  --color-bn-silverLight: #F8FAFC;
+  --color-bn-silverDark: #94A3B8;
+  --color-bn-chrome: #CBD5E1;
+  --color-bn-gold: #C49A45;
+  --color-bn-goldDark: #9E7422;
+  --color-bn-goldLight: #E5C37A;
+  --color-bn-borderLight: rgba(226, 232, 240, 0.85);
+  --color-bn-borderDark: rgba(167, 139, 250, 0.16);
+  --font-cinzel: 'Cinzel', Georgia, serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-urdu: 'Noto Nastaliq Urdu', serif;
+}
+
+body {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  background-color: var(--color-bn-cream);
+  color: #0F172A;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  letter-spacing: -0.01em;
+}
+
+.dark body {
+  background-color: var(--color-bn-dark);
+  color: #F8FAFC;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.02em;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-urdu {
+  font-family: 'Noto Nastaliq Urdu', serif;
+}
+
+/* Apple-Grade Glassmorphism System */
+.glass-panel {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-apple {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-apple-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-apple-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(167, 139, 250, 0.35);
+  box-shadow: 0 20px 48px -10px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Silver & Purple Luxury Gradients */
+.silver-purple-gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 35%, #C4B5FD 70%, #8B5CF6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.silver-gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 40%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.purple-gradient-text {
+  background: linear-gradient(135deg, #DDD6FE 0%, #8B5CF6 55%, #6D28D9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #C4B5FD 0%, #E5C37A 50%, #C49A45 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-purple {
+  box-shadow: 0 0 45px rgba(139, 92, 246, 0.35);
+}
+
+.glow-silver {
+  box-shadow: 0 0 35px rgba(226, 232, 240, 0.25);
+}
+
+/* GPU Accelerated Smooth 3D Floating Animation */
+@keyframes float3d {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateX(2deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float3d 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes pulseAura {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-aura {
+  animation: pulseAura 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

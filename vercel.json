@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/api-wc-v3/:path*",
+      "destination": "https://api.binnemat.com/wp-json/wc/v3/:path*"
+    },
+    {
+      "source": "/api-wc/:path*",
+      "destination": "https://api.binnemat.com/wp-json/wc/store/v1/:path*"
+    },
+    {
+      "source": "/api-wp-v2/:path*",
+      "destination": "https://api.binnemat.com/wp-json/wp/v2/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
