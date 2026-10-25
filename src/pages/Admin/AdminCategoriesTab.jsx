@@ -1,32 +1,22 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, message, Tag } from 'antd';
 import { Plus, RefreshCw, Layers, Edit } from 'lucide-react';
-import { fetchAdminCategories } from '../../services/wooAdminService';
+import { useAdminCategoriesQuery } from '../../hooks/useWooQueries';
 import AdminCreateCategoryModal from './AdminCreateCategoryModal';
 import AdminEditCategoryModal from './AdminEditCategoryModal';
 
 export default function AdminCategoriesTab() {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
 
-  const loadCategories = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchAdminCategories();
-      setCategories(Array.isArray(data) ? data : []);
-    } catch (err) {
-      message.error(`Failed to load categories: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadCategories();
-  }, []);
+  // TanStack Query: Caches categories across admin navigation
+  const { 
+    data: categoriesData = [], 
+    isLoading: loading, 
+    refetch: loadCategories 
+  } = useAdminCategoriesQuery();
+  const categories = Array.isArray(categoriesData) ? categoriesData : [];
 
   return (
     <div className="space-y-4">

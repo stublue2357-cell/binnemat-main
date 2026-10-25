@@ -1,4 +1,4 @@
-/api-wc-v3/*  https://1301029.us21.myftpupload.com/wp-json/wc/v3/:splat  200
-/api-wc/*     https://1301029.us21.myftpupload.com/wp-json/wc/store/v1/:splat  200
-/api-wp-v2/*  https://1301029.us21.myftpupload.com/wp-json/wp/v2/:splat  200
-/*            /index.html                                                 200
+/api-wc-v3/*  https://api.binnemat.com/wp-json/wc/v3/:splat  200
+/api-wc/*     https://api.binnemat.com/wp-json/wc/store/v1/:splat  200
+/api-wp-v2/*  https://api.binnemat.com/wp-json/wp/v2/:splat  200
+/*            /index.html                                     200

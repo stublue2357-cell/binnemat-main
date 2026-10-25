@@ -1,63 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { DollarSign, ShoppingCart, CheckCircle, Package, TrendingUp, CreditCard } from 'lucide-react';
-import { fetchAdminOrders, fetchAdminProducts } from '../../services/wooAdminService';
+import { useAdminOrdersQuery, useAdminProductsQuery } from '../../hooks/useWooQueries';
 import AdminRevenueChart from './AdminRevenueChart';
 import AdminStatusDonut from './AdminStatusDonut';
 
 export default function AdminAnalyticsTab() {
-  const [orders, setOrders] = useState([]);
-  const [stats, setStats] = useState({
-    totalRevenue: 0,
-    totalOrders: 0,
-    processing: 0,
-    completed: 0,
-    totalProducts: 0,
-    avgOrderValue: 0
-  });
-  const [loading, setLoading] = useState(true);
+  const { data: ordersData = [], isLoading: loadingOrders } = useAdminOrdersQuery('');
+  const { data: productsData = [], isLoading: loadingProducts } = useAdminProductsQuery();
+  const loading = loadingOrders || loadingProducts;
 
-  useEffect(() => {
-    async function loadStats() {
-      try {
-        const [ordersData, products] = await Promise.all([
-          fetchAdminOrders(),
-          fetchAdminProducts()
-        ]);
+  const orderList = useMemo(() => Array.isArray(ordersData) ? ordersData : [], [ordersData]);
+  const productList = useMemo(() => Array.isArray(productsData) ? productsData : [], [productsData]);
 
-        const orderList = Array.isArray(ordersData) ? ordersData : [];
-        const productList = Array.isArray(products) ? products : [];
-        setOrders(orderList);
+  const stats = useMemo(() => {
+    let revenue = 0;
+    let proc = 0;
+    let comp = 0;
 
-        let revenue = 0;
-        let proc = 0;
-        let comp = 0;
-
-        orderList.forEach(o => {
-          if (o.status !== 'cancelled') {
-            revenue += Number(o.total || 0);
-          }
-          if (o.status === 'processing') proc++;
-          if (o.status === 'completed') comp++;
-        });
-
-        const activeOrderCount = proc + comp;
-        const avg = activeOrderCount > 0 ? Math.round(revenue / activeOrderCount) : 0;
-
-        setStats({
-          totalRevenue: revenue,
-          totalOrders: orderList.length,
-          processing: proc,
-          completed: comp,
-          totalProducts: productList.length,
-          avgOrderValue: avg
-        });
-      } catch (e) {
-      } finally {
-        setLoading(false);
+    orderList.forEach(o => {
+      if (o.status !== 'cancelled') {
+        revenue += Number(o.total || 0);
       }
-    }
-    loadStats();
-  }, []);
+      if (o.status === 'processing') proc++;
+      if (o.status === 'completed') comp++;
+    });
+
+    const activeOrderCount = proc + comp;
+    const avg = activeOrderCount > 0 ? Math.round(revenue / activeOrderCount) : 0;
+
+    return {
+      totalRevenue: revenue,
+      totalOrders: orderList.length,
+      processing: proc,
+      completed: comp,
+      totalProducts: productList.length,
+      avgOrderValue: avg
+    };
+  }, [orderList, productList]);
 
   const cards = [
     { label: 'Total Store Revenue', value: `Rs. ${stats.totalRevenue.toLocaleString()}`, icon: <DollarSign size={20} className="text-amber-500" />, sub: 'All non-cancelled orders' },

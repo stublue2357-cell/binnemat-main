@@ -33,8 +33,8 @@ export default function ManifestoSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-12 px-4 sm:px-6 max-w-5xl mx-auto my-4 text-slate-900 dark:text-white">
-      <div className="gsap-manifesto-card relative rounded-3xl overflow-hidden glass-apple-card border border-[#E5E4E2] dark:border-white/[0.1] bg-white/95 dark:bg-[#161311]/90 p-8 sm:p-12 text-center shadow-[0_15px_45px_rgba(111,78,55,0.06)] dark:shadow-[0_15px_45px_rgba(0,0,0,0.6)]">
+    <section ref={containerRef} className="py-8 sm:py-12 px-3 sm:px-6 max-w-5xl mx-auto my-2 sm:my-4 text-slate-900 dark:text-white">
+      <div className="gsap-manifesto-card relative rounded-3xl overflow-hidden glass-apple-card border border-[#E5E4E2] dark:border-white/[0.1] bg-white/95 dark:bg-[#161311]/90 p-5 sm:p-12 text-center shadow-[0_15px_45px_rgba(111,78,55,0.06)] dark:shadow-[0_15px_45px_rgba(0,0,0,0.6)]">
         {/* Core Ambient Aurora Glow (Pale Lavender & Mocha) */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#E6EDFD]/70 dark:bg-[#6F4E37]/[0.15] blur-3xl pointer-events-none -z-10" />
 
@@ -48,7 +48,7 @@ export default function ManifestoSection() {
         </div>
 
         {/* Urdu Calligraphy Headline */}
-        <h2 className="font-urdu text-5xl sm:text-7xl md:text-8xl text-slate-900 dark:text-white pt-2 pb-1 leading-[1.4] drop-shadow-sm font-bold">
+        <h2 className="font-urdu text-4xl sm:text-7xl md:text-8xl text-slate-900 dark:text-white pt-2 pb-1 leading-[1.3] drop-shadow-sm font-bold">
           ہر گھر کا سکون
         </h2>
 

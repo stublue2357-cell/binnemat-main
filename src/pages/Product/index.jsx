@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Breadcrumb } from 'antd';
 import ProductGallery from './ProductGallery';
 import ProductInfo from './ProductInfo';
 import ProductSpecsTable from './ProductSpecsTable';
 import ProductCarousel from '../../components/common/ProductCarousel';
-import { fetchProductsByCategory } from '../../services/wooService';
+import { useProductsByCategoryQuery } from '../../hooks/useWooQueries';
 
 export default function ProductView({ 
   product, 
@@ -12,22 +12,9 @@ export default function ProductView({
   onSelectCategory, 
   onNavigateHome 
 }) {
-  const [relatedProducts, setRelatedProducts] = useState([]);
-
-  useEffect(() => {
-    let isMounted = true;
-    async function loadRelated() {
-      if (product?.category) {
-        const prods = await fetchProductsByCategory(product.category);
-        if (isMounted) {
-          const filtered = prods.filter(p => p.id !== product.id);
-          setRelatedProducts(filtered);
-        }
-      }
-    }
-    loadRelated();
-    return () => { isMounted = false; };
-  }, [product]);
+  // Uses cached category products (0 network calls when navigating from catalog/home)
+  const { data: categoryProducts = [] } = useProductsByCategoryQuery(product?.category);
+  const relatedProducts = (categoryProducts || []).filter(p => p.id !== product?.id);
 
   if (!product) {
     return (

@@ -9,19 +9,19 @@
 
 [[redirects]]
   from = "/api-wc-v3/*"
-  to = "https://1301029.us21.myftpupload.com/wp-json/wc/v3/:splat"
+  to = "https://api.binnemat.com/wp-json/wc/v3/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/api-wc/*"
-  to = "https://1301029.us21.myftpupload.com/wp-json/wc/store/v1/:splat"
+  to = "https://api.binnemat.com/wp-json/wc/store/v1/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/api-wp-v2/*"
-  to = "https://1301029.us21.myftpupload.com/wp-json/wp/v2/:splat"
+  to = "https://api.binnemat.com/wp-json/wp/v2/:splat"
   status = 200
   force = true
 

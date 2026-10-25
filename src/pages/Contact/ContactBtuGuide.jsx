@@ -65,9 +65,9 @@ export default function ContactBtuGuide() {
   ];
 
   return (
-    <div ref={containerRef} className="glass-apple-card p-8 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 my-10 shadow-sm relative overflow-hidden">
+    <div ref={containerRef} className="glass-apple-card p-5 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 my-10 shadow-sm relative overflow-hidden">
       <div className="flex items-center gap-3.5 mb-6">
-        <div className="w-10 h-10 rounded-full bg-[#E6EDFD] dark:bg-[#6F4E37]/20 border border-[#E5E4E2] dark:border-white/10 text-[#6F4E37] dark:text-[#E6EDFD] flex items-center justify-center shadow-sm">
+        <div className="w-10 h-10 rounded-full bg-[#E6EDFD] dark:bg-[#6F4E37]/20 border border-[#E5E4E2] dark:border-white/10 text-[#6F4E37] dark:text-[#E6EDFD] flex items-center justify-center shadow-sm shrink-0">
           <Calculator size={18} />
         </div>
         <div>
@@ -80,8 +80,12 @@ export default function ContactBtuGuide() {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs sm:text-sm border-collapse">
+      <span className="sm:hidden text-[11px] text-[#6F4E37] dark:text-[#C49774] font-mono font-semibold block mb-2">
+        ← Swipe horizontally to view full table details →
+      </span>
+
+      <div className="overflow-x-auto pb-2 -mx-1 px-1">
+        <table className="w-full min-w-[580px] text-left text-xs sm:text-sm border-collapse">
           <thead>
             <tr className="border-b border-[#E5E4E2] dark:border-white/10 text-slate-500 dark:text-slate-400">
               <th className="py-3 px-3 font-bold text-slate-900 dark:text-white font-wix">Appliance Category</th>

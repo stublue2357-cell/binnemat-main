@@ -101,32 +101,32 @@ export default function SuperconsciousTypographySection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#E6EDFD]/75 dark:bg-[#6F4E37]/[0.12] blur-3xl pointer-events-none -z-10" />
 
       {/* TOP PILL BADGE */}
-      <div className="flex justify-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E6EDFD]/85 dark:bg-[#1A1614]/90 border border-[#E5E4E2] dark:border-white/[0.1] text-[#6F4E37] dark:text-[#E5E4E2] text-xs font-mono uppercase tracking-widest backdrop-blur-md shadow-sm">
-          <Sparkles size={13} className="text-[#6F4E37] dark:text-[#C49774]" />
+      <div className="flex justify-center mb-6 sm:mb-8 px-2 text-center">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E6EDFD]/85 dark:bg-[#1A1614]/90 border border-[#E5E4E2] dark:border-white/[0.1] text-[#6F4E37] dark:text-[#E5E4E2] text-[10px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest backdrop-blur-md shadow-sm">
+          <Sparkles size={13} className="text-[#6F4E37] dark:text-[#C49774] shrink-0" />
           <span className="font-bold">Domestic Serenity &bull; Engineered In Pakistan</span>
         </div>
       </div>
 
       {/* STAGGERED CAPSULE TYPOGRAPHY (SUPERCONSCIOUS SPEC IN MOCHA & PLATINUM) */}
-      <div className="flex flex-col items-center justify-center text-center space-y-4 sm:space-y-6 select-none">
+      <div className="flex flex-col items-center justify-center text-center space-y-3 sm:space-y-6 select-none px-2">
         {/* LINE 1 */}
-        <div className="gsap-typo-line flex flex-wrap items-center justify-center gap-3 sm:gap-4 font-wix text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tight">
+        <div className="gsap-typo-line flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-wix text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tight">
           <span>End</span>
           {/* Wireframe Capsule 1 */}
-          <span className="gsap-capsule-1 inline-flex items-center gap-2 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-[#E6EDFD]/90 dark:bg-[#1C1816]/95 border border-[#E5E4E2] dark:border-[#8C6547]/40 text-xs sm:text-sm font-mono text-[#6F4E37] dark:text-[#E5E4E2] shadow-[0_4px_20px_rgba(111,78,55,0.08)] hover:scale-105 transition-transform cursor-default will-change-transform">
-            <Flame size={16} className="text-[#6F4E37] dark:text-[#C49774] animate-pulse" />
+          <span className="gsap-capsule-1 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-1 sm:py-2.5 rounded-full bg-[#E6EDFD]/90 dark:bg-[#1C1816]/95 border border-[#E5E4E2] dark:border-[#8C6547]/40 text-[11px] sm:text-sm font-mono text-[#6F4E37] dark:text-[#E5E4E2] shadow-[0_4px_20px_rgba(111,78,55,0.08)] hover:scale-105 transition-transform cursor-default will-change-transform">
+            <Flame size={14} className="text-[#6F4E37] dark:text-[#C49774] animate-pulse" />
             <span className="font-bold text-slate-900 dark:text-white tracking-normal">3s FastHeat™</span>
           </span>
           <span>Winter</span>
         </div>
 
         {/* LINE 2 */}
-        <div className="gsap-typo-line flex flex-wrap items-center justify-center gap-3 sm:gap-4 font-wix text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tight">
+        <div className="gsap-typo-line flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-wix text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tight">
           <span>Chills</span>
           {/* Wireframe Capsule 2 */}
-          <span className="gsap-capsule-2 inline-flex items-center gap-2 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-[#F5F4F2] dark:bg-[#1C1816]/95 border border-[#E5E4E2] dark:border-white/15 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:scale-105 transition-transform cursor-default will-change-transform">
-            <Shield size={16} className="text-emerald-600 dark:text-emerald-400" />
+          <span className="gsap-capsule-2 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-1 sm:py-2.5 rounded-full bg-[#F5F4F2] dark:bg-[#1C1816]/95 border border-[#E5E4E2] dark:border-white/15 text-[11px] sm:text-sm font-mono text-slate-800 dark:text-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:scale-105 transition-transform cursor-default will-change-transform">
+            <Shield size={14} className="text-emerald-600 dark:text-emerald-400" />
             <span className="font-bold text-slate-900 dark:text-white tracking-normal">Incoloy 840</span>
           </span>
           <span className="font-serif-italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#6F4E37] to-[#8C6547] dark:from-[#C49774] dark:to-[#E5E4E2]">
@@ -135,11 +135,11 @@ export default function SuperconsciousTypographySection() {
         </div>
 
         {/* LINE 3 */}
-        <div className="gsap-typo-line flex flex-wrap items-center justify-center gap-3 sm:gap-4 font-wix text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tight">
+        <div className="gsap-typo-line flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-wix text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tight">
           <span>Your</span>
           {/* Wireframe Capsule 3 */}
-          <span className="gsap-capsule-3 inline-flex items-center gap-2 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-[#E6EDFD]/90 dark:bg-[#1C1816]/95 border border-[#E5E4E2] dark:border-[#8C6547]/40 text-xs sm:text-sm font-mono text-[#6F4E37] dark:text-[#E5E4E2] shadow-[0_4px_20px_rgba(111,78,55,0.08)] hover:scale-105 transition-transform cursor-default will-change-transform">
-            <Zap size={16} className="text-amber-500" />
+          <span className="gsap-capsule-3 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-1 sm:py-2.5 rounded-full bg-[#E6EDFD]/90 dark:bg-[#1C1816]/95 border border-[#E5E4E2] dark:border-[#8C6547]/40 text-[11px] sm:text-sm font-mono text-[#6F4E37] dark:text-[#E5E4E2] shadow-[0_4px_20px_rgba(111,78,55,0.08)] hover:scale-105 transition-transform cursor-default will-change-transform">
+            <Zap size={14} className="text-amber-500" />
             <span className="font-bold text-slate-900 dark:text-white tracking-normal">30W Solar Fan</span>
           </span>
           <span className="font-serif-italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#8C6547] to-[#6F4E37] dark:from-[#E5E4E2] dark:to-[#C49774]">

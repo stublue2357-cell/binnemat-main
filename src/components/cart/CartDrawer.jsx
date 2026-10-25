@@ -45,8 +45,8 @@ export default function CartDrawer({ onNavigateCategory }) {
         placement="right"
         onClose={closeCart}
         open={isCartOpen}
-        width={420}
-        styles={{ body: { padding: '20px', display: 'flex', flexDirection: 'column' } }}
+        width={typeof window !== 'undefined' && window.innerWidth < 450 ? '100%' : 420}
+        styles={{ body: { padding: '16px', display: 'flex', flexDirection: 'column' } }}
       >
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center my-auto text-center py-12">

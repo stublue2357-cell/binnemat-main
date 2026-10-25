@@ -54,22 +54,22 @@ export default function ProductCard({ product, onSelectProduct }) {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 mt-1">
           <button 
             onClick={(e) => {
               e.stopPropagation();
               if (onSelectProduct) onSelectProduct(product);
             }}
-            className="rounded-full text-xs font-semibold flex items-center justify-center gap-1 bg-slate-100 dark:bg-white/[0.08] hover:bg-slate-200 dark:hover:bg-white/[0.14] text-slate-800 dark:text-slate-200 border border-[#E5E4E2] dark:border-white/10 h-8 cursor-pointer transition-colors"
+            className="rounded-full text-xs font-semibold flex items-center justify-center gap-1.5 bg-slate-100 dark:bg-white/[0.08] hover:bg-slate-200 dark:hover:bg-white/[0.14] text-slate-800 dark:text-slate-200 border border-[#E5E4E2] dark:border-white/10 h-9 cursor-pointer transition-colors"
           >
-            <Eye size={12} className="text-slate-500 dark:text-slate-400" />
+            <Eye size={13} className="text-slate-500 dark:text-slate-400" />
             <span>Details</span>
           </button>
           <button 
             onClick={handleAddToCart}
-            className="rounded-full text-xs font-bold flex items-center justify-center gap-1 bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 border-none text-white shadow-sm h-8 cursor-pointer transition-all"
+            className="rounded-full text-xs font-bold flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 border-none text-white shadow-sm h-9 cursor-pointer transition-all"
           >
-            <ShoppingBag size={12} />
+            <ShoppingBag size={13} />
             <span>Add</span>
           </button>
         </div>

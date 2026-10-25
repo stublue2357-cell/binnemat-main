@@ -5,6 +5,8 @@ import { Button, Input, message, Tag } from 'antd';
 import { Key, ShieldCheck, RefreshCw, UploadCloud, User } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { fetchAdminOrders } from '../../services/wooAdminService';
+import { resetCircuitBreaker, clearApiCache } from '../../services/apiShield';
+import { queryClient } from '../../config/queryClient';
 import { APP_CONFIG } from '../../config/env';
 
 export default function AdminSettingsTab() {
@@ -146,6 +148,17 @@ export default function AdminSettingsTab() {
               className="rounded-xl font-bold h-10 px-5"
             >
               Test Live Connection
+            </Button>
+            <Button
+              onClick={() => {
+                resetCircuitBreaker();
+                clearApiCache();
+                queryClient.clear();
+                message.success('API Shield reset and TanStack cache cleared successfully!');
+              }}
+              className="rounded-xl font-semibold h-10 px-4 text-xs border-dashed"
+            >
+              Clear API Cache &amp; Reset Shield
             </Button>
           </div>
         </form>

@@ -291,7 +291,7 @@ export default function SuperconsciousWidgetsSection({ onSelectCategory }) {
           </div>
 
           {/* RIGHT COLUMN: STACKING CARDS STAGE (CARDS SLIDE UP OVER EACH OTHER) */}
-          <div className="lg:col-span-7 relative w-full h-[540px] sm:h-[560px]">
+          <div className="lg:col-span-7 relative w-full h-auto lg:h-[560px]">
             {WIDGETS_DATA.map((item, idx) => {
               const Icon = item.icon;
               const GaugeIcon = item.gaugeIcon;

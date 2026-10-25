@@ -3,7 +3,9 @@ import { Outlet, useNavigate, useRouterState } from '@tanstack/react-router';
 import AmbientGlow from '../components/common/AmbientGlow';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
+import MobileBottomBar from '../components/layout/MobileBottomBar';
 import CartDrawer from '../components/cart/CartDrawer';
+import ApiShieldBanner from '../components/common/ApiShieldBanner';
 import { SiteBrandingProvider } from '../context/SiteBrandingContext';
 import { APP_CONFIG } from '../config/env';
 
@@ -27,7 +29,7 @@ export default function RootLayout() {
 
   return (
     <SiteBrandingProvider>
-      <div className="min-h-screen bg-bn-cream dark:bg-bn-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative flex flex-col justify-between">
+      <div className="min-h-screen bg-bn-cream dark:bg-bn-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300 relative flex flex-col justify-between overflow-x-hidden">
         {/* PARALLAX AMBIENT GLOW */}
         <AmbientGlow />
 
@@ -35,7 +37,7 @@ export default function RootLayout() {
         <Navbar />
 
         {/* DYNAMIC ROUTE OUTLET WITH LUXURY TOP CLEARANCE BELOW FIXED NAVBAR */}
-        <main className={`relative z-10 flex-grow pb-16 ${isHome ? '' : 'pt-24 sm:pt-28 md:pt-32'}`}>
+        <main className={`relative z-10 flex-grow pb-24 lg:pb-16 ${isHome ? '' : 'pt-24 sm:pt-28 md:pt-32'}`}>
           <Outlet />
         </main>
 
@@ -44,8 +46,14 @@ export default function RootLayout() {
           onNavigateCategory={(slug) => navigate({ to: '/category/' + slug })} 
         />
 
+        {/* FLOATING MOBILE BOTTOM BAR (THUMB NAVIGATION) */}
+        <MobileBottomBar />
+
         {/* FOOTER */}
         <Footer />
+
+        {/* API RATE LIMIT & CIRCUIT SHIELD NOTICE */}
+        <ApiShieldBanner />
       </div>
     </SiteBrandingProvider>
   );

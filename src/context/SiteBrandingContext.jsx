@@ -51,9 +51,14 @@ export function SiteBrandingProvider({ children }) {
   useEffect(() => {
     let isMounted = true;
     async function syncBackendSettings() {
+      // Never probe admin settings for storefront visitors (prevents 401s and IP ban)
+      const isAdminRoute = typeof window !== 'undefined' && window.location.pathname.includes('bn-portal');
+      const hasWpCreds = localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS;
+      if (!isAdminRoute || !hasWpCreds) return;
+
       try {
         const settings = await fetchWpSettings();
-        if (!isMounted) return;
+        if (!isMounted || !settings || Object.keys(settings).length === 0) return;
 
         if (settings.site_logo && Number(settings.site_logo) > 1965) {
           const cachedId = localStorage.getItem('binnemat_custom_logo_id');

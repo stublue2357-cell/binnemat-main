@@ -10,36 +10,17 @@ import TestimonialsSection from './TestimonialsSection';
 import BrandLogosSection from './BrandLogosSection';
 import NewsletterSection from './NewsletterSection';
 import ProductCarousel from '../../components/common/ProductCarousel';
-import { fetchLiveCategories, fetchLiveProductsBySlug } from '../../services/wooService';
+import { 
+  useCategoriesQuery, 
+  useProductsByCategoryQuery 
+} from '../../hooks/useWooQueries';
 
 export default function Home({ onSelectProduct, onSelectCategory, setActivePage }) {
-  const [categories, setCategories] = useState([]);
-  const [winterProducts, setWinterProducts] = useState([]);
-  const [summerProducts, setSummerProducts] = useState([]);
-  const [cookingProducts, setCookingProducts] = useState([]);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    async function loadData() {
-      const [cats, winter, summer, cooking] = await Promise.all([
-        fetchLiveCategories(),
-        fetchLiveProductsBySlug('winter-collection'),
-        fetchLiveProductsBySlug('summer-collection'),
-        fetchLiveProductsBySlug('stoves-hobs')
-      ]);
-
-      if (isMounted) {
-        setCategories(cats);
-        setWinterProducts(winter);
-        setSummerProducts(summer);
-        setCookingProducts(cooking);
-      }
-    }
-
-    loadData();
-    return () => { isMounted = false; };
-  }, []);
+  // TanStack Query caching with 5-minute staleTime (0 network calls on component re-mounts)
+  const { data: categories = [] } = useCategoriesQuery();
+  const { data: winterProducts = [] } = useProductsByCategoryQuery('winter-collection');
+  const { data: summerProducts = [] } = useProductsByCategoryQuery('summer-collection');
+  const { data: cookingProducts = [] } = useProductsByCategoryQuery('stoves-hobs');
 
   return (
     <div className="relative z-10 bg-[#F7F6F4] dark:bg-[#0E0C0B] text-slate-900 dark:text-white overflow-hidden transition-colors duration-300">

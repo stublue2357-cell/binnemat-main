@@ -54,7 +54,7 @@ export default function ContactCards() {
           href={getWhatsAppLink('Salam Binnemat, I need consultation on appliances.')}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 text-white text-xs font-bold no-underline shadow-md transition-all cursor-pointer"
+          className="inline-flex justify-center w-full sm:w-auto items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 text-white text-xs font-bold no-underline shadow-md transition-all cursor-pointer text-center"
         >
           <Phone size={14} />
           <span>Chat on WhatsApp (+{whatsappNumber})</span>

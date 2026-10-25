@@ -3,7 +3,10 @@ import AllCategoriesGrid from './AllCategoriesGrid';
 import CategoryHeader from './CategoryHeader';
 import CategorySidebarFilter from './CategorySidebarFilter';
 import CategoryProductsGrid from './CategoryProductsGrid';
-import { fetchLiveCategories, fetchProductsByCategory } from '../../services/wooService';
+import { 
+  useCategoriesQuery, 
+  useProductsByCategoryQuery 
+} from '../../hooks/useWooQueries';
 
 export default function CategoryView({ 
   initialCategory = 'all', 
@@ -12,29 +15,15 @@ export default function CategoryView({
 }) {
   const [selectedSlug, setSelectedSlug] = useState(initialCategory);
   const [activeSubCategory, setActiveSubCategory] = useState('all');
-  const [categories, setCategories] = useState([]);
-  const [allProductsInCat, setAllProductsInCat] = useState([]);
 
   useEffect(() => {
     setSelectedSlug(initialCategory);
     setActiveSubCategory('all');
   }, [initialCategory]);
 
-  useEffect(() => {
-    let isMounted = true;
-    async function loadData() {
-      const [cats, prods] = await Promise.all([
-        fetchLiveCategories(),
-        fetchProductsByCategory(selectedSlug)
-      ]);
-      if (isMounted) {
-        setCategories(cats);
-        setAllProductsInCat(prods);
-      }
-    }
-    loadData();
-    return () => { isMounted = false; };
-  }, [selectedSlug]);
+  // TanStack Query with 5min staleTime, deduplication, and automatic request cancellation
+  const { data: categories = [] } = useCategoriesQuery();
+  const { data: allProductsInCat = [] } = useProductsByCategoryQuery(selectedSlug);
 
   const currentCategory = categories.find((c) => c.slug === selectedSlug);
   const currentCategoryName = currentCategory ? currentCategory.name : 'All Appliances';

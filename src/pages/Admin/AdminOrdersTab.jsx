@@ -1,36 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Tag, Button, Select, message, Popconfirm } from 'antd';
 import { RefreshCw, MessageSquare, Check, X, ShoppingCart, FileText } from 'lucide-react';
-import { fetchAdminOrders, updateOrderStatus } from '../../services/wooAdminService';
+import { useQueryClient } from '@tanstack/react-query';
+import { updateOrderStatus } from '../../services/wooAdminService';
+import { useAdminOrdersQuery } from '../../hooks/useWooQueries';
 import AdminOrderReceiptModal from './AdminOrderReceiptModal';
 
 export default function AdminOrdersTab() {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [filterStatus, setFilterStatus] = useState('all');
   const [receiptOrder, setReceiptOrder] = useState(null);
+  const queryClient = useQueryClient();
 
-  const loadOrders = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchAdminOrders(filterStatus === 'all' ? '' : filterStatus);
-      setOrders(Array.isArray(data) ? data : []);
-    } catch (err) {
-      message.error(`Failed to load orders: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadOrders();
-  }, [filterStatus]);
+  // TanStack Query: Caches orders across tab navigation and aborts outdated requests
+  const { 
+    data: ordersData = [], 
+    isLoading: loading, 
+    refetch: loadOrders 
+  } = useAdminOrdersQuery(filterStatus);
+  const orders = Array.isArray(ordersData) ? ordersData : [];
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       await updateOrderStatus(orderId, newStatus);
       message.success(`Order #${orderId} marked as ${newStatus}`);
-      loadOrders();
+      queryClient.invalidateQueries({ queryKey: ['admin-orders'] });
     } catch (err) {
       message.error(`Failed to update status: ${err.message}`);
     }

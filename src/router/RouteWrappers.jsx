@@ -1,5 +1,5 @@
 import AdminPage from '../pages/Admin';
-﻿import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from '@tanstack/react-router';
 import Home from '../pages/Home';
 import CategoryView from '../pages/Categories';
@@ -13,7 +13,7 @@ import ShippingPolicy from '../pages/Policy/ShippingPolicy';
 import ReturnPolicy from '../pages/Policy/ReturnPolicy';
 import PrivacyPolicy from '../pages/Policy/PrivacyPolicy';
 import TermsPolicy from '../pages/Policy/TermsPolicy';
-import { fetchProductBySlug } from '../services/wooService';
+import { useProductBySlugQuery } from '../hooks/useWooQueries';
 
 export function HomeRoute() {
   const navigate = useNavigate();
@@ -52,22 +52,7 @@ export function CategorySlugRoute() {
 export function ProductSlugRoute() {
   const navigate = useNavigate();
   const { slug } = useParams({ strict: false });
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let isMounted = true;
-    setLoading(true);
-    async function load() {
-      const data = await fetchProductBySlug(slug);
-      if (isMounted) {
-        setProduct(data);
-        setLoading(false);
-      }
-    }
-    load();
-    return () => { isMounted = false; };
-  }, [slug]);
+  const { data: product, isLoading: loading } = useProductBySlugQuery(slug);
 
   if (loading) {
     return (

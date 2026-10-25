@@ -96,6 +96,7 @@ export default function CheckoutModal({ open, onClose }) {
       footer={null}
       centered
       width={600}
+      style={{ maxWidth: '95vw', top: 20 }}
       className="checkout-modal"
     >
       {completedOrder ? (

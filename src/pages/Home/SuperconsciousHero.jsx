@@ -100,7 +100,7 @@ export default function SuperconsciousHero({ onExploreClick, onSelectCategory })
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[92vh] flex flex-col items-center justify-between pt-32 sm:pt-36 md:pt-40 pb-14 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FAF9F7] via-[#FFFFFF] to-[#F3F2F0] dark:from-[#110F0E] dark:via-[#0A0908] dark:to-[#0E0C0B] text-slate-900 dark:text-white transition-colors duration-300"
+      className="relative min-h-[90vh] flex flex-col items-center justify-between pt-24 sm:pt-32 md:pt-36 pb-12 px-3 sm:px-6 overflow-hidden bg-gradient-to-b from-[#FAF9F7] via-[#FFFFFF] to-[#F3F2F0] dark:from-[#110F0E] dark:via-[#0A0908] dark:to-[#0E0C0B] text-slate-900 dark:text-white transition-colors duration-300"
     >
       {/* 1. MOCHA BROWN, PLATINUM SILVER & PALE LAVENDER AURORA BACKDROP */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
@@ -111,30 +111,30 @@ export default function SuperconsciousHero({ onExploreClick, onSelectCategory })
       </div>
 
       {/* 2. TOP INDICATOR PILL (PALE LAVENDER WITH MOCHA ACCENT) */}
-      <div className="gsap-hero-fade inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E6EDFD]/85 dark:bg-[#1A1614]/90 border border-[#E5E4E2] dark:border-white/[0.1] backdrop-blur-xl mb-4 shadow-[0_4px_20px_rgba(111,78,55,0.06)]">
-        <span className="w-2 h-2 rounded-full bg-[#6F4E37] shadow-[0_0_8px_#6F4E37] animate-pulse" />
-        <span className="text-xs font-mono font-bold tracking-wider text-[#6F4E37] dark:text-[#E5E4E2] uppercase">
+      <div className="gsap-hero-fade inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E6EDFD]/85 dark:bg-[#1A1614]/90 border border-[#E5E4E2] dark:border-white/[0.1] backdrop-blur-xl mb-3 shadow-[0_4px_20px_rgba(111,78,55,0.06)] text-center max-w-[95%]">
+        <span className="w-2 h-2 rounded-full bg-[#6F4E37] shadow-[0_0_8px_#6F4E37] animate-pulse shrink-0" />
+        <span className="text-[11px] sm:text-xs font-mono font-bold tracking-wider text-[#6F4E37] dark:text-[#E5E4E2] uppercase truncate">
           The Thermal &amp; Inverter Intelligence
         </span>
       </div>
 
       {/* 3. GIANT LOWERCASE TYPOGRAPHY (SUPERCONSCIOUS SIGNATURE) */}
-      <div className="text-center max-w-4xl mx-auto mb-6">
-        <h1 className="gsap-hero-fade font-wix font-black text-6xl sm:text-8xl lg:text-[112px] tracking-tight text-slate-900 dark:text-white lowercase leading-none select-none m-0">
+      <div className="text-center max-w-4xl mx-auto mb-4 px-2">
+        <h1 className="gsap-hero-fade font-wix font-black text-5xl sm:text-7xl lg:text-[112px] tracking-tight text-slate-900 dark:text-white lowercase leading-none select-none m-0 break-words">
           binnemat
         </h1>
-        <p className="gsap-hero-fade text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto mt-4 font-normal leading-relaxed">
+        <p className="gsap-hero-fade text-slate-600 dark:text-slate-300 text-xs sm:text-base max-w-xl mx-auto mt-3 font-normal leading-relaxed">
           Zero winter gas chills, whisper-silent 30W solar fans, and Italian precision cooking.
         </p>
       </div>
 
       {/* 4. APPLIANCE INTERACTIVE SELECTOR PILLS */}
-      <div className="gsap-hero-fade flex items-center gap-1.5 p-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-[#E5E4E2] dark:border-white/[0.1] backdrop-blur-xl mb-8 z-20">
+      <div className="gsap-hero-fade flex items-center gap-1.5 p-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-[#E5E4E2] dark:border-white/[0.1] backdrop-blur-xl mb-6 z-20 max-w-full overflow-x-auto no-scrollbar">
         {HERO_APPLIANCES.map((app, idx) => (
           <button
             key={app.id}
             onClick={() => setActiveTab(idx)}
-            className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 border-none cursor-pointer ${
+            className={`px-3 sm:px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 border-none cursor-pointer whitespace-nowrap ${
               activeTab === idx
                 ? 'bg-gradient-to-r from-[#6F4E37] to-[#8C6547] text-white shadow-[0_4px_16px_rgba(111,78,55,0.35)]'
                 : 'bg-transparent text-slate-600 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
@@ -146,7 +146,7 @@ export default function SuperconsciousHero({ onExploreClick, onSelectCategory })
       </div>
 
       {/* 5. CENTERPIECE: 3D FLOATING APPLIANCE & SPATIAL CARD */}
-      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10">
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center z-10">
         {/* LEFT COLUMN: HERO SPECS & STATS */}
         <div className="lg:col-span-4 order-2 lg:order-1 flex flex-col justify-center text-left">
           <div className="inline-flex items-center gap-2 text-xs font-mono text-[#6F4E37] dark:text-[#C49774] uppercase tracking-wider mb-2 font-bold">
@@ -154,26 +154,26 @@ export default function SuperconsciousHero({ onExploreClick, onSelectCategory })
             <span>{currentAppliance.tag}</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-wix font-extrabold text-slate-900 dark:text-white mb-3 tracking-tight">
+          <h2 className="text-xl sm:text-3xl font-wix font-extrabold text-slate-900 dark:text-white mb-2 sm:mb-3 tracking-tight">
             {currentAppliance.name}
           </h2>
 
-          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6 font-normal">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 sm:mb-6 font-normal">
             {currentAppliance.desc}
           </p>
 
           {/* KEY SPECS LIST */}
-          <div className="space-y-2.5 mb-6">
+          <div className="space-y-2 mb-5">
             {currentAppliance.specs.map((spec, i) => (
               <div key={i} className="flex items-center gap-2 text-xs text-slate-800 dark:text-slate-200 font-medium">
-                <CheckCircle size={15} className="text-[#6F4E37] dark:text-[#C49774] flex-shrink-0" />
+                <CheckCircle size={14} className="text-[#6F4E37] dark:text-[#C49774] flex-shrink-0" />
                 <span>{spec}</span>
               </div>
             ))}
           </div>
 
-          {/* CTA BUTTONS */}
-          <div className="flex items-center gap-3">
+          {/* CTA BUTTONS - FULL WIDTH ON MOBILE */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full">
             <button
               onClick={() => {
                 if (activeTab === 0 && onSelectCategory) onSelectCategory('winter-collection');
@@ -181,7 +181,7 @@ export default function SuperconsciousHero({ onExploreClick, onSelectCategory })
                 else if (activeTab === 2 && onSelectCategory) onSelectCategory('stoves-hobs');
                 else if (onExploreClick) onExploreClick();
               }}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 text-white font-bold text-xs tracking-wide transition-all shadow-[0_6px_22px_rgba(111,78,55,0.35)] flex items-center gap-2 cursor-pointer border-none"
+              className="px-5 py-3 rounded-full bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 text-white font-bold text-xs tracking-wide transition-all shadow-[0_6px_22px_rgba(111,78,55,0.35)] flex items-center justify-center gap-2 cursor-pointer border-none"
             >
               <span>Explore Collection</span>
               <ArrowUpRight size={15} />
@@ -190,7 +190,7 @@ export default function SuperconsciousHero({ onExploreClick, onSelectCategory })
               href={`https://wa.me/${APP_CONFIG.WHATSAPP_NUMBER}?text=Salam%20Binnemat,%20I%20am%20interested%20in%20${encodeURIComponent(currentAppliance.name)}`}
               target="_blank"
               rel="noreferrer"
-              className="px-5 py-3 rounded-full bg-white dark:bg-[#161522] hover:bg-slate-50 dark:hover:bg-[#1E1D2D] border border-[#E5E4E2] dark:border-white/10 text-slate-800 dark:text-slate-200 font-bold text-xs transition-all flex items-center gap-2 no-underline shadow-sm"
+              className="px-5 py-3 rounded-full bg-white dark:bg-[#161522] hover:bg-slate-50 dark:hover:bg-[#1E1D2D] border border-[#E5E4E2] dark:border-white/10 text-slate-800 dark:text-slate-200 font-bold text-xs transition-all flex items-center justify-center gap-2 no-underline shadow-sm text-center"
             >
               <MessageCircle size={14} className="text-[#6F4E37] dark:text-[#C49774]" />
               <span>Direct Inquire</span>
@@ -200,7 +200,7 @@ export default function SuperconsciousHero({ onExploreClick, onSelectCategory })
 
         {/* CENTER COLUMN: 3D FLOATING SPATIAL PORTAL */}
         <div className="gsap-hero-portal lg:col-span-5 order-1 lg:order-2 flex items-center justify-center relative">
-          <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(111,78,55,0.18)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-[#E5E4E2] dark:border-white/10 bg-[#0C0B0C] p-2">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-[420px] md:h-[420px] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(111,78,55,0.18)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-[#E5E4E2] dark:border-white/10 bg-[#0C0B0C] p-2">
             {/* Glowing Mocha & Lavender Torus Rim */}
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[#6F4E37]/30 via-[#8C6547]/20 to-[#E6EDFD]/25 blur-xl -z-10 animate-pulse-aura" />
             

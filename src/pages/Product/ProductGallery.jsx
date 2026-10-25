@@ -27,7 +27,7 @@ export default function ProductGallery({ images, badge, name }) {
   return (
     <div ref={galleryRef} className="flex flex-col gap-4">
       {/* MAIN VIEWPORT WITH LUXURY SHADOW & BADGE */}
-      <div className="glass-apple-card rounded-3xl border border-[#E5E4E2] dark:border-white/10 bg-[#F7F6F4] dark:bg-[#12100E] p-2 h-[380px] sm:h-[460px] flex items-center justify-center relative overflow-hidden shadow-xl group">
+      <div className="glass-apple-card rounded-3xl border border-[#E5E4E2] dark:border-white/10 bg-[#F7F6F4] dark:bg-[#12100E] p-2 h-[300px] sm:h-[460px] flex items-center justify-center relative overflow-hidden shadow-xl group">
         <span className="absolute top-4 left-4 z-10 bg-[#E6EDFD]/95 dark:bg-[#1A1715]/95 text-[#6F4E37] dark:text-[#E6EDFD] border border-[#E5E4E2] dark:border-white/10 text-xs font-mono font-bold px-3.5 py-1 rounded-full shadow-md backdrop-blur-md">
           {badge || "100% BRAND SEALED"}
         </span>

@@ -1,6 +1,6 @@
 // Application Environment Configuration (12-Factor App)
 function resolveWpApiUrl() {
-  const envUrl = import.meta.env.VITE_WP_API_URL || 'https://1301029.us21.myftpupload.com/wp-json/wc/store/v1';
+  const envUrl = import.meta.env.VITE_WP_API_URL || 'https://api.binnemat.com/wp-json/wc/store/v1';
   if (import.meta.env.DEV) {
     return '/api-wc';
   }
@@ -8,7 +8,7 @@ function resolveWpApiUrl() {
 }
 
 function resolveWcV3ApiUrl() {
-  const envUrl = import.meta.env.VITE_WC_V3_URL || 'https://1301029.us21.myftpupload.com/wp-json/wc/v3';
+  const envUrl = import.meta.env.VITE_WC_V3_URL || 'https://api.binnemat.com/wp-json/wc/v3';
   if (import.meta.env.DEV) {
     return '/api-wc-v3';
   }

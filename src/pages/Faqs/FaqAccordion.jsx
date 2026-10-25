@@ -109,7 +109,7 @@ export default function FaqAccordion() {
   return (
     <div ref={containerRef} className="space-y-6">
       {/* CATEGORY FILTER TABS */}
-      <div className="gsap-faq-tabs flex flex-wrap gap-2 justify-center mb-6">
+      <div className="gsap-faq-tabs flex gap-2 overflow-x-auto no-scrollbar sm:flex-wrap sm:justify-center mb-6 py-1 -mx-2 px-2 scroll-smooth">
         {[
           { id: 'all', label: 'All Questions' },
           { id: 'warranty', label: 'Official Warranty' },
@@ -120,7 +120,7 @@ export default function FaqAccordion() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all border cursor-pointer ${
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all border cursor-pointer whitespace-nowrap flex-shrink-0 ${
               activeTab === tab.id
                 ? 'bg-gradient-to-r from-[#6F4E37] to-[#8C6547] text-white border-transparent shadow-sm'
                 : 'glass-apple-card text-slate-700 dark:text-slate-300 border-[#E5E4E2] dark:border-white/10 hover:border-[#6F4E37]/50'
@@ -132,7 +132,7 @@ export default function FaqAccordion() {
       </div>
 
       {/* ACCORDION */}
-      <div className="gsap-faq-card glass-apple-card p-6 sm:p-8 rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
+      <div className="gsap-faq-card glass-apple-card p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
         <Collapse
           items={formattedItems}
           defaultActiveKey={['1']}

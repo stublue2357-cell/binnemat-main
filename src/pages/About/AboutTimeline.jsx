@@ -85,7 +85,7 @@ export default function AboutTimeline() {
         </div>
 
         {/* RIGHT COLUMN: 3 SHARP PUNCHY BULLETS */}
-        <div className="gsap-timeline-right lg:col-span-6 p-8 sm:p-10 space-y-6">
+        <div className="gsap-timeline-right lg:col-span-6 p-5 sm:p-10 space-y-6">
           <div>
             <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#6F4E37] dark:text-[#C49774] block mb-1">
               THE BINNEMAT BENCHMARK

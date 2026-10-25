@@ -1,39 +1,32 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Tag, message, Popconfirm } from 'antd';
 import { Plus, RefreshCw, Trash2, Package, Edit } from 'lucide-react';
-import { fetchAdminProducts, deleteAdminProduct } from '../../services/wooAdminService';
+import { useQueryClient } from '@tanstack/react-query';
+import { deleteAdminProduct } from '../../services/wooAdminService';
+import { useAdminProductsQuery } from '../../hooks/useWooQueries';
 import AdminAddProductModal from './AdminAddProductModal';
 import AdminEditProductModal from './AdminEditProductModal';
 import { SAFE_SVG_PLACEHOLDER } from '../../services/mockData';
 
 export default function AdminProductsTab() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const queryClient = useQueryClient();
 
-  const loadProducts = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchAdminProducts();
-      setProducts(Array.isArray(data) ? data : []);
-    } catch (err) {
-      message.error(`Failed to load products: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
+  // TanStack Query: Caches products across tab navigation, automatic cancellation on unmount
+  const { 
+    data: productsData = [], 
+    isLoading: loading, 
+    refetch: loadProducts 
+  } = useAdminProductsQuery();
+  const products = Array.isArray(productsData) ? productsData : [];
 
   const handleDelete = async (id) => {
     try {
       await deleteAdminProduct(id);
       message.success(`Product #${id} removed successfully`);
-      loadProducts();
+      queryClient.invalidateQueries({ queryKey: ['admin-products'] });
     } catch (err) {
       message.error(`Failed to delete product: ${err.message}`);
     }

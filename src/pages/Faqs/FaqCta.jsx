@@ -34,7 +34,7 @@ export default function FaqCta() {
   }, []);
 
   return (
-    <div ref={ctaRef} className="mt-12 text-center glass-apple-card p-8 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
+    <div ref={ctaRef} className="mt-12 text-center glass-apple-card p-5 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
       <h3 className="font-wix text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
         Still Have Specific Questions?
       </h3>
@@ -46,7 +46,7 @@ export default function FaqCta() {
         icon={<PhoneCall size={16} />}
         href={APP_CONFIG.DEVELOPER_WHATSAPP}
         target="_blank"
-        className="rounded-full h-11 px-7 font-bold bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 border-none text-white shadow-md inline-flex items-center gap-2"
+        className="w-full sm:w-auto rounded-full h-12 sm:h-11 px-5 sm:px-7 font-bold text-xs sm:text-sm bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 border-none text-white shadow-md inline-flex items-center justify-center gap-2"
       >
         Ask on WhatsApp (+92 321 2418430)
       </Button>

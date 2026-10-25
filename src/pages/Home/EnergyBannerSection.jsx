@@ -32,58 +32,58 @@ export default function EnergyBannerSection({ onShopClick }) {
   }, []);
 
   return (
-    <section ref={containerRef} className="max-w-[1360px] mx-auto px-[5%] my-8 sm:my-10 text-slate-900 dark:text-white">
-      <div className="glass-apple-card rounded-3xl p-8 md:p-12 border border-emerald-500/20 dark:border-emerald-500/30 bg-gradient-to-br from-emerald-50/50 via-white to-[#E6EDFD]/40 dark:from-emerald-950/20 dark:via-[#161311] dark:to-[#6F4E37]/15 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-[0_15px_45px_rgba(5,150,105,0.08)] dark:shadow-[0_15px_45px_rgba(0,0,0,0.6)] relative overflow-hidden">
+    <section ref={containerRef} className="max-w-[1360px] mx-auto px-3 sm:px-[5%] my-6 sm:my-10 text-slate-900 dark:text-white">
+      <div className="glass-apple-card rounded-3xl p-5 sm:p-8 md:p-12 border border-emerald-500/20 dark:border-emerald-500/30 bg-gradient-to-br from-emerald-50/50 via-white to-[#E6EDFD]/40 dark:from-emerald-950/20 dark:via-[#161311] dark:to-[#6F4E37]/15 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center shadow-[0_15px_45px_rgba(5,150,105,0.08)] dark:shadow-[0_15px_45px_rgba(0,0,0,0.6)] relative overflow-hidden">
         {/* Ambient Backlight */}
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-80 h-80 bg-emerald-400/[0.12] dark:bg-emerald-500/[0.08] blur-3xl pointer-events-none -z-10" />
 
         {/* LEFT COLUMN: MARKETING BILL COMPARISON */}
         <div className="lg:col-span-7">
-          <span className="text-[11px] font-mono tracking-widest text-emerald-700 dark:text-emerald-400 uppercase block mb-3 font-bold flex items-center gap-1.5">
-            <Zap size={14} className="text-emerald-600 fill-emerald-600" />
+          <span className="text-[10px] sm:text-[11px] font-mono tracking-wider sm:tracking-widest text-emerald-700 dark:text-emerald-400 uppercase block mb-2 sm:mb-3 font-bold flex items-center gap-1.5">
+            <Zap size={14} className="text-emerald-600 fill-emerald-600 shrink-0" />
             <span>12V SOLAR DIRECT &bull; 65% ELECTRICITY REDUCTION</span>
           </span>
 
-          <h2 className="font-wix text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 leading-tight tracking-tight">
+          <h2 className="font-wix text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 sm:mb-4 leading-tight tracking-tight">
             30W BLDC Inverter Fans. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-[#6F4E37] dark:from-emerald-400 dark:to-[#C49774]">
               Runs 3x Longer on UPS &amp; Solar.
             </span>
           </h2>
 
-          <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-6 max-w-xl font-normal">
+          <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-6 max-w-xl font-normal">
             Slashing summer electric bills by 65%. Pure copper motor draws only <strong className="text-slate-900 dark:text-white font-bold">30 Watts</strong> with zero motor humming and whisper-silent high air displacement.
           </p>
 
           {/* VISUAL BILL COMPARISON TILE */}
-          <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-white dark:bg-[#1A1715] border border-[#E5E4E2] dark:border-white/[0.1] mb-8 max-w-lg text-xs shadow-sm">
-            <div className="border-r border-[#E5E4E2] dark:border-white/10 pr-4">
-              <span className="text-slate-500 block mb-1 font-medium">Old 85W AC Fan</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-[#1A1715] border border-[#E5E4E2] dark:border-white/[0.1] mb-6 sm:mb-8 max-w-lg text-xs shadow-sm">
+            <div className="sm:border-r border-[#E5E4E2] dark:border-white/10 sm:pr-4 pb-2 sm:pb-0 border-b sm:border-b-0">
+              <span className="text-slate-500 block mb-0.5 font-medium">Old 85W AC Fan</span>
               <strong className="text-rose-600 text-base block font-wix font-bold">
                 <GsapCounter endValue={3200} prefix="Rs. " suffix=" / Mo" />
               </strong>
               <span className="text-[10px] text-slate-400">Overheats, drains inverter battery</span>
             </div>
-            <div className="pl-2">
-              <span className="text-emerald-700 font-mono font-bold block mb-1">Binnemat 30W BLDC</span>
-              <strong className="text-emerald-600 text-base block font-wix font-bold">
+            <div className="sm:pl-2 pt-1 sm:pt-0">
+              <span className="text-emerald-700 dark:text-emerald-400 font-mono font-bold block mb-0.5">Binnemat 30W BLDC</span>
+              <strong className="text-emerald-600 dark:text-emerald-400 text-base block font-wix font-bold">
                 <GsapCounter endValue={1100} prefix="Rs. " suffix=" / Mo" />
               </strong>
-              <span className="text-[10px] text-emerald-600 font-bold">
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
                 <GsapCounter endValue={25200} prefix="Save Rs. " suffix="+ yearly" />
               </span>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
             <button 
               onClick={onShopClick}
-              className="px-7 py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 hover:bg-emerald-600 dark:hover:bg-emerald-500 dark:hover:text-white font-bold text-xs tracking-wide transition-all shadow-[0_4px_18px_rgba(5,150,105,0.25)] flex items-center gap-2 cursor-pointer border-none"
+              className="px-6 py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 hover:bg-emerald-600 dark:hover:bg-emerald-500 dark:hover:text-white font-bold text-xs tracking-wide transition-all shadow-[0_4px_18px_rgba(5,150,105,0.25)] flex items-center justify-center gap-2 cursor-pointer border-none"
             >
               <span>Explore 30W BLDC Fans</span>
               <ArrowUpRight size={15} />
             </button>
-            <span className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-1.5 font-mono font-semibold">
+            <span className="text-xs text-slate-600 dark:text-slate-300 flex items-center justify-center gap-1.5 font-mono font-semibold">
               <ShieldCheck size={16} className="text-emerald-600 dark:text-emerald-400" />
               <span>2 Years Full Motor Replacement</span>
             </span>

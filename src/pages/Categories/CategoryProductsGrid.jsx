@@ -3,14 +3,16 @@ import gsap from 'gsap';
 import { Select, Input } from 'antd';
 import { Search } from 'lucide-react';
 import ProductCard from '../../components/common/ProductCard';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export default function CategoryProductsGrid({ products, onSelectProduct }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms debounce
   const [sortBy, setSortBy] = useState('featured');
   const gridRef = useRef(null);
 
   const filtered = (products || []).filter((p) => {
-    return p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return p.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
   });
 
   const sorted = [...filtered].sort((a, b) => {
@@ -55,7 +57,7 @@ export default function CategoryProductsGrid({ products, onSelectProduct }) {
           />
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           <span className="text-xs text-slate-500 font-semibold font-wix">Sort By:</span>
           <Select
             value={sortBy}

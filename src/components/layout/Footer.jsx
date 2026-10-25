@@ -22,7 +22,7 @@ export default function Footer({ logoSrc }) {
   ];
 
   return (
-    <footer className="bg-[#F7F6F4] dark:bg-[#0E0C0B] text-slate-700 dark:text-slate-300 pt-16 pb-8 border-t border-[#E5E4E2] dark:border-white/[0.08] relative z-10 transition-colors duration-300">
+    <footer className="bg-[#F7F6F4] dark:bg-[#0E0C0B] text-slate-700 dark:text-slate-300 pt-16 pb-16 sm:pb-8 border-t border-[#E5E4E2] dark:border-white/[0.08] relative z-10 transition-colors duration-300">
       <div className="max-w-[1360px] mx-auto px-[5%] grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
         {/* COL 1: BRAND INFO */}
         <div>
@@ -104,7 +104,7 @@ export default function Footer({ logoSrc }) {
       </div>
 
       {/* COPYRIGHT BOTTOM BAR */}
-      <div className="max-w-[1360px] mx-auto px-[5%] pt-8 border-t border-[#E5E4E2] dark:border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+      <div className="max-w-[1360px] mx-auto px-[5%] pt-8 border-t border-[#E5E4E2] dark:border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4 text-center sm:text-left">
         <p className="m-0">&copy; {new Date().getFullYear()} Binnemat Pakistan. All Rights Reserved.</p>
         <p className="m-0 font-urdu text-sm font-bold text-[#6F4E37] dark:text-[#C49774]">
           ہر گھر کا سکون — بااعتماد الیکٹرک واٹر ہیٹرز اور ہوم ایپلائینسز

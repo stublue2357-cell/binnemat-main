@@ -62,7 +62,7 @@ export default function CampaignBannerSection() {
   return (
     <section ref={containerRef} className="max-w-[1360px] mx-auto px-[5%] my-8">
       <div className="glass-apple-card p-5 sm:p-7 rounded-3xl border border-[#E5E4E2] dark:border-white/[0.1] bg-white/95 dark:bg-[#161311]/90 shadow-[0_10px_35px_rgba(111,78,55,0.06)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-center">
           {highlights.map((h, idx) => (
             <div key={idx} className="gsap-campaign-item flex items-center gap-3.5">
               <div className={`w-11 h-11 rounded-2xl ${h.color} dark:bg-white/[0.08] border border-black/[0.04] dark:border-white/10 flex items-center justify-center flex-shrink-0 shadow-sm`}>

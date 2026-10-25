@@ -56,7 +56,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div ref={formRef} className="glass-apple-card p-8 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
+    <div ref={formRef} className="glass-apple-card p-5 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
       <span className="text-[11px] font-extrabold tracking-widest uppercase text-[#6F4E37] dark:text-[#C49774] block mb-2">
         INQUIRY &amp; SIZING ASSISTANCE
       </span>

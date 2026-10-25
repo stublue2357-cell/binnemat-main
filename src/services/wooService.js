@@ -1,4 +1,4 @@
-﻿import { getJson } from './apiClient';
+import { getJson } from './apiClient';
 import { 
   MOCK_CATEGORIES, 
   MOCK_WINTER_PRODUCTS, 
@@ -35,9 +35,13 @@ export function normalizeWcProduct(raw) {
   };
 }
 
-export async function fetchLiveCategories() {
+/**
+ * Fetch Categories from WooCommerce Store API
+ * Cached for 5-10 minutes with circuit breaker and AbortController
+ */
+export async function fetchLiveCategories(options = {}) {
   try {
-    const data = await getJson('/products/categories?per_page=12');
+    const data = await getJson('/products/categories?per_page=12', {}, options);
     if (Array.isArray(data) && data.length > 0) {
       console.log("Data from backend - Categories:", data);
       return data.map(cat => ({
@@ -50,20 +54,24 @@ export async function fetchLiveCategories() {
       }));
     }
   } catch (error) {
-    // Isolated network error
+    // If request was aborted by navigation, propagate abort
+    if (error.name === 'AbortError') throw error;
   }
   console.warn("Backend unavailable / empty - showing mock data (Categories)");
   return MOCK_CATEGORIES;
 }
 
-export async function fetchProductsByCategory(categorySlug) {
+/**
+ * Fetch Products by Category from WooCommerce Store API
+ */
+export async function fetchProductsByCategory(categorySlug, options = {}) {
   const allMock = [...MOCK_WINTER_PRODUCTS, ...MOCK_SUMMER_PRODUCTS, ...MOCK_STOVES_HOBS];
 
   try {
     const endpoint = (categorySlug && categorySlug !== 'all') 
       ? `/products?per_page=20&category=${categorySlug}` 
       : `/products?per_page=30`;
-    const data = await getJson(endpoint);
+    const data = await getJson(endpoint, {}, options);
 
     if (Array.isArray(data) && data.length > 0) {
       console.log(`Data from backend - Products (${categorySlug || 'all'}):`, data);
@@ -75,7 +83,7 @@ export async function fetchProductsByCategory(categorySlug) {
       return normalized;
     }
   } catch (error) {
-    // Isolated network error
+    if (error.name === 'AbortError') throw error;
   }
 
   console.warn(`Backend unavailable / empty - showing mock data for: ${categorySlug || 'all'}`);
@@ -88,22 +96,48 @@ export async function fetchProductsByCategory(categorySlug) {
   return matched.length > 0 ? matched : allMock;
 }
 
-export async function fetchProductBySlug(slug) {
+/**
+ * Single Request Batching: Fetch multiple products by IDs in 1 single API call
+ * Instead of firing separate requests inside loops or map(), batches IDs: /products?include=1,2,3,4
+ */
+export async function fetchProductsByIds(ids = [], options = {}) {
+  if (!ids || ids.length === 0) return [];
+  const cleanIds = Array.from(new Set(ids.map(Number).filter(Boolean)));
+  if (cleanIds.length === 0) return [];
+
+  try {
+    const endpoint = `/products?include=${cleanIds.join(',')}&per_page=${cleanIds.length}`;
+    const data = await getJson(endpoint, {}, options);
+    if (Array.isArray(data) && data.length > 0) {
+      return data.map(normalizeWcProduct);
+    }
+  } catch (error) {
+    if (error.name === 'AbortError') throw error;
+  }
+
+  const allMock = [...MOCK_WINTER_PRODUCTS, ...MOCK_SUMMER_PRODUCTS, ...MOCK_STOVES_HOBS];
+  return allMock.filter(p => cleanIds.includes(p.id));
+}
+
+/**
+ * Fetch a single product by slug
+ */
+export async function fetchProductBySlug(slug, options = {}) {
   const allMock = [...MOCK_WINTER_PRODUCTS, ...MOCK_SUMMER_PRODUCTS, ...MOCK_STOVES_HOBS];
   try {
-    const data = await getJson(`/products?slug=${slug}`);
+    const data = await getJson(`/products?slug=${slug}`, {}, options);
     if (Array.isArray(data) && data.length > 0) {
       console.log("Data from backend - Single Product:", data[0]);
       return normalizeWcProduct(data[0]);
     }
   } catch (error) {
-    // Isolated network error
+    if (error.name === 'AbortError') throw error;
   }
   console.warn(`Backend unavailable / empty - showing mock product for: ${slug}`);
   const found = allMock.find(p => p.slug === slug);
   return found || allMock[0];
 }
 
-export async function fetchLiveProductsBySlug(categorySlug) {
-  return fetchProductsByCategory(categorySlug);
+export async function fetchLiveProductsBySlug(categorySlug, options = {}) {
+  return fetchProductsByCategory(categorySlug, options);
 }
