@@ -19,14 +19,16 @@ export function formatPriceString(prices) {
 }
 
 export function normalizeWcProduct(raw) {
+  const allCategorySlugs = (raw.categories || []).map(c => c.slug?.toLowerCase());
   return {
     id: raw.id,
     name: raw.name,
     slug: raw.slug,
     price: raw.prices?.price,
     formatted_price: formatPriceString(raw.prices),
-    badge: raw.on_sale ? "SALE" : "ORIGINAL",
+    badge: raw.on_sale ? "SALE" : (raw.badge || "FLAGSHIP"),
     category: raw.categories?.[0]?.slug || "general",
+    categorySlugs: allCategorySlugs,
     subCategory: raw.subCategory || "general",
     rating: 5,
     images: (raw.images && raw.images.length > 0) ? raw.images : [{ src: SAFE_SVG_PLACEHOLDER }],
@@ -54,7 +56,6 @@ export async function fetchLiveCategories(options = {}) {
       }));
     }
   } catch (error) {
-    // If request was aborted by navigation, propagate abort
     if (error.name === 'AbortError') throw error;
   }
   console.warn("Backend unavailable / empty - showing mock data (Categories)");
@@ -77,7 +78,12 @@ export async function fetchProductsByCategory(categorySlug, options = {}) {
       console.log(`Data from backend - Products (${categorySlug || 'all'}):`, data);
       const normalized = data.map(normalizeWcProduct);
       if (categorySlug && categorySlug !== 'all') {
-        const filtered = normalized.filter(p => p.category === categorySlug);
+        const target = categorySlug.toLowerCase();
+        const filtered = normalized.filter(p => 
+          p.category?.toLowerCase() === target || 
+          p.categorySlugs?.includes(target) ||
+          p.categorySlugs?.some(s => s.includes('main'))
+        );
         return filtered.length > 0 ? filtered : normalized;
       }
       return normalized;
@@ -87,6 +93,52 @@ export async function fetchProductsByCategory(categorySlug, options = {}) {
   }
 
   console.warn(`Backend unavailable / empty - showing mock data for: ${categorySlug || 'all'}`);
+  if (categorySlug === 'main-products' || categorySlug === 'main') {
+    return [
+      {
+        id: 101,
+        name: "FastHeat™ Aura H1 Smart Electric Geyser",
+        slug: "binnemat-sapphire-35l-geyser",
+        price: 36500,
+        formatted_price: "Rs. 36,500",
+        badge: "WINTER WARMTH • 3-SEC FLOW",
+        category: "main-products",
+        subCategory: "storage-geysers",
+        rating: 5,
+        images: [{ src: "/images/superconscious_heater_hero.jpg" }],
+        description: "Digital heating with diamond sapphire enamel core and Italian Incoloy 840 element. 24-hour heat retention with ELCB safety shock breaker.",
+        specs: { "Heat Retention": "24 Hours", "Heating Element": "Incoloy 840 Hard-Water", "Shock Protection": "ELCB Built-in Breaker", "Warranty": "7-Year Tank Warranty" }
+      },
+      {
+        id: 103,
+        name: "Aeria 30W BLDC Aerodynamic Inverter Fan",
+        slug: "binnemat-aeria-30w-bldc-fan",
+        price: 14800,
+        formatted_price: "Rs. 14,800",
+        badge: "SUMMER BREEZE • 30W INVERTER",
+        category: "main-products",
+        subCategory: "bldc-ceiling-fans",
+        rating: 5,
+        images: [{ src: "/images/superconscious_fan_hero.jpg" }],
+        description: "Whisper-quiet BLDC motor with aerodynamic aerofoil blades. Direct 12V solar and UPS support, slashes electric bills by 65%.",
+        specs: { "Power Consumption": "30W Ultra-Low", "Electricity Saved": "+65% Reduction", "Noise Level": "Whisper Silent <28dB", "Motor": "100% Pure Copper High-Torque" }
+      },
+      {
+        id: 104,
+        name: "Ignis Italian Beveled Built-in Hob 3-Burner",
+        slug: "binnemat-ignis-italian-hob",
+        price: 28500,
+        formatted_price: "Rs. 28,500",
+        badge: "CULINARY PRECISION • 8MM GLASS",
+        category: "main-products",
+        subCategory: "built-in-hobs",
+        rating: 5,
+        images: [{ src: "/images/superconscious_hob_hero.jpg" }],
+        description: "8mm tempered thermal-shock glass with heavy cast iron trivets and Spanish auto flame-failure safety cutoff valves.",
+        specs: { "Thermal Output": "4.8 kW High Power", "Burners": "Pure Italian Brass Crowns", "Safety": "Auto Flame-Failure Cutoff", "Glass": "8mm Beveled Tempered Glass" }
+      }
+    ];
+  }
   if (!categorySlug || categorySlug === 'all') return allMock;
   if (categorySlug === 'winter-collection') return MOCK_WINTER_PRODUCTS;
   if (categorySlug === 'summer-collection') return MOCK_SUMMER_PRODUCTS;

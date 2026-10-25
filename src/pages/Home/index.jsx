@@ -26,6 +26,7 @@ export default function Home({ onSelectProduct, onSelectCategory, setActivePage 
     <div className="relative z-10 bg-[#F7F6F4] dark:bg-[#0E0C0B] text-slate-900 dark:text-white overflow-hidden transition-colors duration-300">
       {/* 1. SUPERCONSCIOUS HERO SECTION WITH 3D SPATIAL APPLIANCES & AURORA GLOW */}
       <SuperconsciousHero 
+        onSelectProduct={onSelectProduct}
         onExploreClick={() => onSelectCategory && onSelectCategory('winter-collection')}
         onSelectCategory={onSelectCategory}
       />
