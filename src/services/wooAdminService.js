@@ -134,8 +134,8 @@ export async function createAdminCategory(categoryData) {
 }
 
 export async function uploadMediaToWordPress(file) {
-  const wpUser = localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || 'umair';
-  const wpPass = localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || 'X7lx oZdf 0C9I G3KF J5rc S9V5';
+  const wpUser = localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || '';
+  const wpPass = localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || '';
   const endpoint = '/api-wp-v2/media';
 
   const cleanName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
@@ -177,8 +177,8 @@ export async function uploadMediaToWordPress(file) {
 }
 
 export async function fetchWpSettings() {
-  const wpUser = localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || 'umair';
-  const wpPass = localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || 'X7lx oZdf 0C9I G3KF J5rc S9V5';
+  const wpUser = localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || '';
+  const wpPass = localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || '';
   const endpoint = '/api-wp-v2/settings';
   const headers = { 'Accept': 'application/json' };
   if (wpPass) headers['Authorization'] = 'Basic ' + btoa(`${wpUser}:${wpPass.replace(/\s+/g, '')}`);
@@ -188,8 +188,8 @@ export async function fetchWpSettings() {
 }
 
 export async function updateWpSettings(settingsData) {
-  const wpUser = localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || 'umair';
-  const wpPass = localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || 'X7lx oZdf 0C9I G3KF J5rc S9V5';
+  const wpUser = localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || '';
+  const wpPass = localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || '';
   const endpoint = '/api-wp-v2/settings';
   const headers = {
     'Content-Type': 'application/json',

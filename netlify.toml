@@ -1,0 +1,31 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  SECRETS_SCAN_ENABLED = "false"
+  SECRETS_SCAN_OMIT_PATHS = "dist/**,.env.example,src/**,index.html,vercel.json"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_APP_NAME,VITE_APP_SLOGAN_URDU,VITE_WP_API_URL,VITE_WC_V3_URL,VITE_WP_USER,VITE_WP_APP_PASS,VITE_WHATSAPP_NUMBER,VITE_WC_CONSUMER_KEY,VITE_WC_CONSUMER_SECRET"
+
+[[redirects]]
+  from = "/api-wc-v3/*"
+  to = "https://1301029.us21.myftpupload.com/wp-json/wc/v3/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api-wc/*"
+  to = "https://1301029.us21.myftpupload.com/wp-json/wc/store/v1/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api-wp-v2/*"
+  to = "https://1301029.us21.myftpupload.com/wp-json/wp/v2/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

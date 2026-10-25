@@ -11,8 +11,8 @@ export default function AdminSettingsTab() {
   const { hasKeys, updateApiKeys } = useAdminAuth();
   const [ck, setCk] = useState(APP_CONFIG.WC_CONSUMER_KEY || localStorage.getItem('binnemat_admin_ck') || '');
   const [cs, setCs] = useState(APP_CONFIG.WC_CONSUMER_SECRET || localStorage.getItem('binnemat_admin_cs') || '');
-  const [wpUser, setWpUser] = useState(localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || 'umair');
-  const [wpAppPass, setWpAppPass] = useState(localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || 'X7lx oZdf 0C9I G3KF J5rc S9V5');
+  const [wpUser, setWpUser] = useState(localStorage.getItem('binnemat_wp_user') || APP_CONFIG.WP_USER || '');
+  const [wpAppPass, setWpAppPass] = useState(localStorage.getItem('binnemat_wp_app_pass') || APP_CONFIG.WP_APP_PASS || '');
   const [testing, setTesting] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState(hasKeys ? 'configured' : 'missing');
 
