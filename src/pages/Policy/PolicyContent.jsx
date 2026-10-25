@@ -1,9 +1,38 @@
-﻿import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from '@tanstack/react-router';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ShieldCheck, Truck, RotateCcw, Lock, FileText, ArrowRight } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function PolicyContent() {
   const navigate = useNavigate();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    ScrollTrigger.refresh();
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.gsap-policy-card',
+        { y: 15, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.45,
+          stagger: 0.08,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   const policies = [
     {
@@ -74,22 +103,22 @@ export default function PolicyContent() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div ref={containerRef} className="space-y-6">
       {policies.map((p) => (
         <section
           key={p.id}
-          className="glass-panel p-6 sm:p-8 rounded-3xl border border-bn-borderLight dark:border-bn-borderDark bg-white/80 dark:bg-[#18181B]/80 shadow-sm hover:shadow-md transition-shadow"
+          className="gsap-policy-card glass-apple-card p-6 sm:p-8 rounded-3xl border border-[#E5E4E2] dark:border-white/10 bg-white/95 dark:bg-[#161311]/95 shadow-sm hover:shadow-md transition-shadow"
         >
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-bn-gold/15 flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-[#E6EDFD] dark:bg-[#6F4E37]/20 text-[#6F4E37] dark:text-[#E6EDFD] flex items-center justify-center flex-shrink-0">
                 {p.icon}
               </div>
               <div>
-                <span className="text-[11px] font-extrabold tracking-widest uppercase text-bn-goldDark dark:text-bn-goldLight block">
+                <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#6F4E37] dark:text-[#C49774] block">
                   {p.badge}
                 </span>
-                <h2 className="font-cinzel text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100 m-0">
+                <h2 className="font-wix text-xl sm:text-2xl font-extrabold text-neutral-900 dark:text-neutral-100 m-0">
                   {p.title}
                 </h2>
               </div>
@@ -100,18 +129,18 @@ export default function PolicyContent() {
                 navigate({ to: p.path });
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-bn-goldDark dark:text-bn-goldLight hover:underline bg-transparent border-none cursor-pointer self-start sm:self-center"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#6F4E37] dark:text-[#E6EDFD] hover:underline bg-transparent border-none cursor-pointer self-start sm:self-center"
             >
               <span>Read Full Policy</span>
               <ArrowRight size={14} />
             </button>
           </div>
 
-          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300 mb-4">
+          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300 mb-4 font-normal">
             {p.summary}
           </p>
 
-          <div className="p-4 rounded-2xl bg-neutral-50/80 dark:bg-neutral-800/50 border border-bn-borderLight dark:border-bn-borderDark">
+          <div className="p-4 rounded-2xl bg-[#F7F6F4] dark:bg-[#12100E] border border-[#E5E4E2] dark:border-white/10">
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 m-0 pl-4 list-disc">
               {p.points.map((pt, idx) => (
                 <li key={idx} className="leading-snug">

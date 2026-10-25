@@ -1,9 +1,38 @@
-﻿import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Input, Button, Select, message } from 'antd';
 import { MessageSquare } from 'lucide-react';
 import { APP_CONFIG } from '../../config/env';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function ContactForm() {
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el) return;
+
+    ScrollTrigger.refresh();
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(el,
+        { y: 20, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -27,53 +56,53 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-bn-borderLight dark:border-bn-borderDark bg-white/75 dark:bg-[#18181B]/80 shadow-sm">
-      <span className="text-xs font-extrabold tracking-widest uppercase text-bn-goldDark dark:text-bn-goldLight block mb-2">
-        INQUIRY & SIZING ASSISTANCE
+    <div ref={formRef} className="glass-apple-card p-8 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
+      <span className="text-[11px] font-extrabold tracking-widest uppercase text-[#6F4E37] dark:text-[#C49774] block mb-2">
+        INQUIRY &amp; SIZING ASSISTANCE
       </span>
-      <h2 className="font-cinzel text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
+      <h2 className="font-wix text-2xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
         Request Appliance Consultation
       </h2>
-      <p className="text-xs text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+      <p className="text-xs text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
         Submit your details and our team will reach out with genuine pricing, geyser capacity sizing, and technical advice.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">Your Full Name *</label>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Your Full Name *</label>
           <Input 
             placeholder="e.g. Tariq Mahmood"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
-            className="rounded-xl h-11"
+            className="rounded-xl h-11 border-[#E5E4E2] dark:border-white/10"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">WhatsApp / Phone *</label>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">WhatsApp / Phone *</label>
             <Input 
               placeholder="0321 0000000"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               required
-              className="rounded-xl h-11"
+              className="rounded-xl h-11 border-[#E5E4E2] dark:border-white/10"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">City in Pakistan</label>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">City in Pakistan</label>
             <Input 
               placeholder="e.g. Lahore / Karachi"
               value={formData.city}
               onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-              className="rounded-xl h-11"
+              className="rounded-xl h-11 border-[#E5E4E2] dark:border-white/10"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">Appliance of Interest</label>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Appliance of Interest</label>
           <Select 
             value={formData.category}
             onChange={(val) => setFormData({ ...formData, category: val })}
@@ -88,13 +117,13 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">Household Requirements or Notes</label>
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Household Requirements or Notes</label>
           <Input.TextArea 
             rows={3}
             placeholder="e.g. 35L geyser for family bathroom or 4-burner glass hob for kitchen installation."
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="rounded-xl"
+            className="rounded-xl border-[#E5E4E2] dark:border-white/10"
           />
         </div>
 
@@ -103,7 +132,7 @@ export default function ContactForm() {
           htmlType="submit"
           icon={<MessageSquare size={16} />}
           size="large"
-          className="w-full rounded-full h-12 font-bold bg-gradient-to-r from-bn-gold to-bn-goldDark border-none text-white shadow-md flex items-center justify-center gap-2 mt-2"
+          className="w-full rounded-full h-12 font-bold bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 border-none text-white shadow-md flex items-center justify-center gap-2 mt-2"
         >
           Send Inquiry via WhatsApp
         </Button>

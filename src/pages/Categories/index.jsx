@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AllCategoriesGrid from './AllCategoriesGrid';
 import CategoryHeader from './CategoryHeader';
 import CategorySidebarFilter from './CategorySidebarFilter';
@@ -45,7 +45,7 @@ export default function CategoryView({
     : allProductsInCat.filter(p => p.subCategory === activeSubCategory);
 
   return (
-    <div className="max-w-[1360px] mx-auto px-[5%] py-10 relative z-10">
+    <div className="max-w-[1360px] mx-auto px-[5%] py-4 sm:py-6 relative z-10">
       {selectedSlug === 'all' ? (
         <AllCategoriesGrid 
           categories={categories} 

@@ -1,42 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Nastaliq+Urdu:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;1,6..72,600&family=Noto+Nastaliq+Urdu:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Wix+Madefor+Display:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-bn-cream: #F4F4F8;
-  --color-bn-dark: #0B0A14;
-  --color-bn-darker: #06050C;
-  --color-bn-purple: #8B5CF6;
-  --color-bn-purpleDark: #6D28D9;
-  --color-bn-purpleLight: #C4B5FD;
-  --color-bn-purpleGlow: rgba(139, 92, 246, 0.35);
-  --color-bn-silver: #E2E8F0;
-  --color-bn-silverLight: #F8FAFC;
-  --color-bn-silverDark: #94A3B8;
-  --color-bn-chrome: #CBD5E1;
-  --color-bn-gold: #C49A45;
-  --color-bn-goldDark: #9E7422;
-  --color-bn-goldLight: #E5C37A;
-  --color-bn-borderLight: rgba(226, 232, 240, 0.85);
-  --color-bn-borderDark: rgba(167, 139, 250, 0.16);
+  --color-bn-cream: #F7F6F4;
+  --color-bn-dark: #0E0C0B;
+  --color-bn-darker: #070605;
+  --color-bn-mocha: #6F4E37;
+  --color-bn-mochaDark: #523624;
+  --color-bn-mochaLight: #8C6547;
+  --color-bn-mochaGlow: rgba(111, 78, 55, 0.35);
+  --color-bn-platinum: #E5E4E2;
+  --color-bn-platinumLight: #F7F6F5;
+  --color-bn-platinumDark: #A6A5A3;
+  --color-bn-lavender: #E6EDFD;
+  --color-bn-lavenderSoft: #ECE6FB;
+  --color-bn-borderPlatinum: rgba(229, 228, 226, 0.85);
+  --color-bn-borderLight: rgba(229, 228, 226, 0.85);
+  --color-bn-borderDark: rgba(229, 228, 226, 0.14);
+  /* Aliases to guarantee 100% full-site Mocha Brown and Platinum Silver alignment */
+  --color-bn-gold: #6F4E37;
+  --color-bn-goldDark: #523624;
+  --color-bn-goldLight: #8C6547;
+  --color-bn-goldGlow: rgba(111, 78, 55, 0.35);
   --font-cinzel: 'Cinzel', Georgia, serif;
   --font-outfit: 'Outfit', sans-serif;
+  --font-wix: 'Wix Madefor Display', sans-serif;
+  --font-serif-italic: 'Newsreader', Georgia, serif;
   --font-urdu: 'Noto Nastaliq Urdu', serif;
 }
 
-body {
-  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-  overflow-x: hidden;
-  background-color: var(--color-bn-cream);
-  color: #0F172A;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  letter-spacing: -0.01em;
+/* Superconscious Custom Scrollbar (Mocha & Platinum) */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
 }
 
-.dark body {
-  background-color: var(--color-bn-dark);
-  color: #F8FAFC;
+::-webkit-scrollbar-track {
+  background: #E5E4E2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8C6547;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6F4E37;
+}
+
+::selection {
+  background-color: #6F4E37;
+  color: #FFFFFF;
+}
+
+body {
+  font-family: 'Wix Madefor Display', 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  background-color: #F7F6F4;
+  color: #1E1B18;
+  letter-spacing: -0.015em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #0E0C0B;
+  color: #F7F6F5;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #141211;
 }
 
 .font-cinzel {
@@ -48,70 +82,86 @@ body {
   font-family: 'Outfit', sans-serif;
 }
 
+.font-wix {
+  font-family: 'Wix Madefor Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-serif-italic {
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
+}
+
 .font-urdu {
   font-family: 'Noto Nastaliq Urdu', serif;
 }
 
-/* Apple-Grade Glassmorphism System */
+/* Apple-Grade Glassmorphism System - Mocha Brown, Platinum Silver & Pale Lavender */
 .glass-panel {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
 .glass-apple {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(229, 228, 226, 0.9);
+  box-shadow: 0 10px 35px -5px rgba(111, 78, 55, 0.08);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+html.dark .glass-apple {
+  background: rgba(18, 15, 14, 0.88);
+  border: 1px solid rgba(229, 228, 226, 0.14);
+  box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.6);
 }
 
 .glass-apple-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(247, 246, 245, 0.9) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(229, 228, 226, 0.9);
+  box-shadow: 0 12px 35px -10px rgba(111, 78, 55, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.dark .glass-apple-card {
+  background: linear-gradient(135deg, rgba(24, 20, 18, 0.94) 0%, rgba(16, 13, 12, 0.9) 100%);
+  border: 1px solid rgba(229, 228, 226, 0.14);
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .glass-apple-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(167, 139, 250, 0.35);
-  box-shadow: 0 20px 48px -10px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-color: rgba(111, 78, 55, 0.45);
+  box-shadow: 0 20px 48px -10px rgba(111, 78, 55, 0.18), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
-/* Silver & Purple Luxury Gradients */
-.silver-purple-gradient-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 35%, #C4B5FD 70%, #8B5CF6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+html.dark .glass-apple-card:hover {
+  border-color: rgba(196, 151, 116, 0.45);
+  box-shadow: 0 20px 48px -10px rgba(111, 78, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-.silver-gradient-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 40%, #94A3B8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.purple-gradient-text {
-  background: linear-gradient(135deg, #DDD6FE 0%, #8B5CF6 55%, #6D28D9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
+/* Luxury Gradients (Mocha Brown & Platinum Silver) */
+.mocha-gradient-text,
 .gold-gradient-text {
-  background: linear-gradient(135deg, #C4B5FD 0%, #E5C37A 50%, #C49A45 100%);
+  background: linear-gradient(135deg, #6F4E37 0%, #8C6547 55%, #C49774 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.glow-purple {
-  box-shadow: 0 0 45px rgba(139, 92, 246, 0.35);
+.platinum-mocha-gradient {
+  background: linear-gradient(135deg, #1E1B18 0%, #6F4E37 55%, #8C6547 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.glow-silver {
-  box-shadow: 0 0 35px rgba(226, 232, 240, 0.25);
+.glow-mocha {
+  box-shadow: 0 0 35px rgba(111, 78, 55, 0.35);
+}
+
+.glow-platinum {
+  box-shadow: 0 0 30px rgba(229, 228, 226, 0.4);
 }
 
 /* GPU Accelerated Smooth 3D Floating Animation */

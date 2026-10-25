@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import HeroSection from './HeroSection';
+import SuperconsciousHero from './SuperconsciousHero';
 import CampaignBannerSection from './CampaignBannerSection';
-import ManifestoSection from './ManifestoSection';
+import SuperconsciousTypographySection from './SuperconsciousTypographySection';
+import SuperconsciousWidgetsSection from './SuperconsciousWidgetsSection';
 import CategoriesSection from './CategoriesSection';
-import TechFeatureSection from './TechFeatureSection';
-import ValueSection from './ValueSection';
 import EnergyBannerSection from './EnergyBannerSection';
-import DividerSection from './DividerSection';
+import ManifestoSection from './ManifestoSection';
 import TestimonialsSection from './TestimonialsSection';
 import BrandLogosSection from './BrandLogosSection';
 import NewsletterSection from './NewsletterSection';
-import Heater3DScrollShowcase from './HeaterScrollShowcase';
 import ProductCarousel from '../../components/common/ProductCarousel';
 import { fetchLiveCategories, fetchLiveProductsBySlug } from '../../services/wooService';
 
@@ -44,39 +42,36 @@ export default function Home({ onSelectProduct, onSelectCategory, setActivePage 
   }, []);
 
   return (
-    <div className="relative z-10 space-y-4">
-      {/* 1. HERO SECTION WITH MARKETING PHOTOGRAPHY */}
-      <HeroSection onExploreClick={() => onSelectCategory && onSelectCategory('winter-collection')} />
+    <div className="relative z-10 bg-[#F7F6F4] dark:bg-[#0E0C0B] text-slate-900 dark:text-white overflow-hidden transition-colors duration-300">
+      {/* 1. SUPERCONSCIOUS HERO SECTION WITH 3D SPATIAL APPLIANCES & AURORA GLOW */}
+      <SuperconsciousHero 
+        onExploreClick={() => onSelectCategory && onSelectCategory('winter-collection')}
+        onSelectCategory={onSelectCategory}
+      />
 
-      {/* 2. 4-POINT CAMPAIGN HIGHLIGHT BAR */}
-      <CampaignBannerSection />
-
-      {/* 3. URDU MANIFESTO SLOGAN */}
+      {/* 2. THE BINNEMAT URDU MANIFESTO ("ہر گھر کا سکون") */}
       <ManifestoSection />
 
-      {/* 4. CATEGORIES DIRECTORY GRID WITH RICH IMAGERY */}
-      <CategoriesSection 
-        categories={categories} 
-        onSelectCategory={onSelectCategory}
-        onViewAllClick={() => setActivePage && setActivePage('categories')}
-      />
+      {/* 3. CAMPAIGN HIGHLIGHT BAR (FROSTED PILL CARDS) */}
+      <CampaignBannerSection />
 
-      {/* 5. FASTHEAT & INCOLOY HARD-WATER MARKETING SPLIT */}
-      <TechFeatureSection />
+      {/* 4. SUPERCONSCIOUS SIGNATURE CAPSULE TYPOGRAPHY (CONTROL YOUR REALITY STYLE) */}
+      <SuperconsciousTypographySection />
 
-      {/* 6. VALUE PROMISE TILES */}
-      <ValueSection />
+      {/* FIXED STILL BACKGROUND (MOCHA BROWN, PLATINUM SILVER & PALE LAVENDER AURORA) */}
+      <div className="fixed inset-0 pointer-events-none -z-20 bg-[#F7F6F4] dark:bg-[#0E0C0B] transition-colors duration-300">
+        <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[850px] h-[850px] bg-[#E6EDFD]/60 dark:bg-[#E6EDFD]/[0.06] blur-[150px] rounded-full" />
+        <div className="absolute top-[55%] right-[-5%] w-[650px] h-[650px] bg-[#6F4E37]/[0.045] dark:bg-[#6F4E37]/[0.1] blur-[130px] rounded-full" />
+        <div className="absolute top-[80%] left-[-5%] w-[550px] h-[550px] bg-[#E5E4E2]/50 dark:bg-[#E5E4E2]/[0.04] blur-[120px] rounded-full" />
+      </div>
 
-      {/* 7. IMMERSIVE 3D SCROLL-DRIVEN ROTATING HEATER SHOWCASE */}
-      <Heater3DScrollShowcase 
-        liveProducts={winterProducts}
-        onSelectProduct={onSelectProduct}
-      />
+      {/* 4. UPGRADE YOUR LIVING - PINNED STACKING CARDS (BACKGROUND STILL, CARDS SLIDE UP) */}
+      <SuperconsciousWidgetsSection onSelectCategory={onSelectCategory} />
 
-      {/* 8. WINTER COLLECTION CAROUSEL (ELECTRIC GEYSERS) */}
+      {/* 6. WINTER COLLECTION CAROUSEL (ELECTRIC GEYSERS) */}
       <section className="max-w-[1360px] mx-auto px-[5%]">
         <ProductCarousel
-          eyebrow="WINTER WARMTH &bull; FASTHEAT"
+          eyebrow="THERMAL COMFORT &bull; 3S FASTHEAT"
           title="Winter Collection (Electric Geysers)"
           products={winterProducts}
           onSelectProduct={onSelectProduct}
@@ -89,36 +84,37 @@ export default function Home({ onSelectProduct, onSelectCategory, setActivePage 
       {/* 9. SUMMER COLLECTION CAROUSEL (BLDC & ELECTRIC FANS) */}
       <section className="max-w-[1360px] mx-auto px-[5%]">
         <ProductCarousel
-          eyebrow="BEAT THE HEAT &bull; 30W ECO SAVERS"
+          eyebrow="AERODYNAMIC COOLING &bull; 30W SOLAR INVERTERS"
           title="Summer Collection (BLDC & Electric Fans)"
           products={summerProducts}
           onSelectProduct={onSelectProduct}
         />
       </section>
 
-      {/* 10. SECTION DIVIDER TILES (GEYSERS & BUILT-IN HOBS) */}
-      <DividerSection 
-        onExploreGeysers={() => onSelectCategory && onSelectCategory('winter-collection')}
-        onExploreHobs={() => onSelectCategory && onSelectCategory('stoves-hobs')}
-      />
-
-      {/* 11. COOKING PRODUCTS CAROUSEL (STOVES & BUILT-IN HOBS) */}
+      {/* 10. COOKING PRODUCTS CAROUSEL (STOVES & BUILT-IN HOBS) */}
       <section className="max-w-[1360px] mx-auto px-[5%]">
         <ProductCarousel
-          eyebrow="CULINARY MASTERY &bull; 8MM GLASS"
+          eyebrow="CULINARY MASTERY &bull; 8MM BEVELED GLASS"
           title="Cooking Stoves & Built-in Hobs"
           products={cookingProducts}
           onSelectProduct={onSelectProduct}
         />
       </section>
 
-      {/* 12. CUSTOMER VOICES */}
+      {/* 11. CATEGORIES DIRECTORY GRID IN FROSTED GLASS */}
+      <CategoriesSection 
+        categories={categories} 
+        onSelectCategory={onSelectCategory}
+        onViewAllClick={() => setActivePage && setActivePage('categories')}
+      />
+
+      {/* 13. REAL PAKISTANI HOMES VERIFIED REVIEWS */}
       <TestimonialsSection />
 
-      {/* 13. OFFICIAL BRAND PARTNERS */}
+      {/* 14. OFFICIAL BRAND PARTNERS */}
       <BrandLogosSection />
 
-      {/* 14. VIP NEWSLETTER */}
+      {/* 15. VIP CONCIERGE & CAPSULE NEWSLETTER */}
       <NewsletterSection />
     </div>
   );

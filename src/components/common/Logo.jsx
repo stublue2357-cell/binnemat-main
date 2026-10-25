@@ -23,13 +23,20 @@ export default function Logo({ logoSrc, onClick }) {
   }
 
   return (
-    <div onClick={onClick} className="cursor-pointer flex flex-col select-none">
-      <span className="font-cinzel text-2xl font-black tracking-wider text-neutral-900 dark:text-neutral-100 leading-none">
-        {APP_CONFIG.APP_NAME.toUpperCase()}<span className="text-bn-gold">.</span>
-      </span>
-      <span className="font-urdu text-xs font-bold text-bn-goldDark dark:text-bn-goldLight mt-1 text-right">
-        {APP_CONFIG.SLOGAN_URDU}
-      </span>
+    <div onClick={onClick} className="cursor-pointer flex items-center gap-2.5 select-none group text-left">
+      <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#6F4E37] to-[#8C6547] flex items-center justify-center p-0.5 shadow-[0_0_12px_rgba(111,78,55,0.25)] group-hover:scale-105 transition-transform">
+        <div className="w-full h-full rounded-full bg-white dark:bg-[#111018] flex items-center justify-center">
+          <div className="w-3.5 h-3.5 rounded-full border-2 border-[#6F4E37] animate-pulse" />
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <span className="font-wix font-extrabold text-xl tracking-tight text-slate-900 dark:text-white lowercase leading-none">
+          binnemat
+        </span>
+        <span className="text-[9px] font-mono tracking-widest text-[#6F4E37] dark:text-[#C49774] uppercase mt-0.5 font-bold">
+          Thermal &bull; Inverter
+        </span>
+      </div>
     </div>
   );
 }

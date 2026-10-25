@@ -1,45 +1,78 @@
-﻿import React from 'react';
-import { PhoneCall, ShieldCheck, Truck, Zap, Flame } from 'lucide-react';
-import { APP_CONFIG } from '../../config/env';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ShieldCheck, Truck, Zap, Flame } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function CampaignBannerSection() {
+  const containerRef = useRef(null);
+
   const highlights = [
     {
-      icon: <Flame size={20} className="text-amber-500" />,
-      title: "Winter FastHeat Geysers",
-      sub: "3-Second Steam & 50L Storage"
+      icon: <Flame size={18} className="text-[#6F4E37] dark:text-[#E5E4E2]" />,
+      title: "FastHeat™ Geysers",
+      sub: "3s Flow & 50L Enamel Storage",
+      color: "bg-[#E6EDFD]"
     },
     {
-      icon: <Zap size={20} className="text-amber-500" />,
-      title: "30W BLDC Inverter Fans",
-      sub: "65% Power Saver & Silent Motor"
+      icon: <Zap size={18} className="text-emerald-600 dark:text-emerald-400" />,
+      title: "30W BLDC Inverters",
+      sub: "65% Power Cut & Solar Direct",
+      color: "bg-emerald-50"
     },
     {
-      icon: <Truck size={20} className="text-amber-500" />,
-      title: "Express 50+ Cities Dispatch",
-      sub: "Same-Day in Lahore & Twin Cities"
+      icon: <Truck size={18} className="text-[#6F4E37] dark:text-[#E5E4E2]" />,
+      title: "50+ Cities Express",
+      sub: "Doorstep Delivery Pakistan",
+      color: "bg-[#E6EDFD]"
     },
     {
-      icon: <ShieldCheck size={20} className="text-amber-500" />,
-      title: "Official Brand Warranties",
-      sub: "Stamped Manufacturer Cards"
+      icon: <ShieldCheck size={18} className="text-[#8C6547] dark:text-[#C49774]" />,
+      title: "Factory Guaranteed",
+      sub: "100% Brand Sealed Original",
+      color: "bg-[#6F4E37]/10"
     }
   ];
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from('.gsap-campaign-item', {
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 95%',
+          toggleActions: 'play none none none',
+          once: true
+        },
+        y: 25,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power2.out',
+        clearProps: 'all'
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="max-w-[1360px] mx-auto px-[5%] mb-14">
-      <div className="glass-panel p-6 sm:p-8 rounded-3xl border-2 border-bn-gold/30 bg-gradient-to-r from-bn-gold/10 via-white/80 to-bn-gold/10 dark:from-[#18181B] dark:via-[#1e1e24] dark:to-[#18181B] shadow-lg">
+    <section ref={containerRef} className="max-w-[1360px] mx-auto px-[5%] my-8">
+      <div className="glass-apple-card p-5 sm:p-7 rounded-3xl border border-[#E5E4E2] dark:border-white/[0.1] bg-white/95 dark:bg-[#161311]/90 shadow-[0_10px_35px_rgba(111,78,55,0.06)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 items-center">
           {highlights.map((h, idx) => (
-            <div key={idx} className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-white dark:bg-neutral-800 shadow-sm border border-bn-gold/30 flex items-center justify-center flex-shrink-0">
+            <div key={idx} className="gsap-campaign-item flex items-center gap-3.5">
+              <div className={`w-11 h-11 rounded-2xl ${h.color} dark:bg-white/[0.08] border border-black/[0.04] dark:border-white/10 flex items-center justify-center flex-shrink-0 shadow-sm`}>
                 {h.icon}
               </div>
               <div>
-                <strong className="block text-xs sm:text-sm font-bold text-neutral-900 dark:text-neutral-100">
+                <strong className="block text-xs sm:text-sm font-wix font-bold text-slate-900 dark:text-white">
                   {h.title}
                 </strong>
-                <span className="text-[11px] text-neutral-500 dark:text-neutral-400">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-normal">
                   {h.sub}
                 </span>
               </div>

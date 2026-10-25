@@ -1,7 +1,36 @@
-﻿import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Calculator } from 'lucide-react';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function ContactBtuGuide() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    ScrollTrigger.refresh();
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(el,
+        { y: 20, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   const sizingData = [
     { 
       appliance: "Instant Electric Geyser (3kW - 9kW)", 
@@ -36,17 +65,17 @@ export default function ContactBtuGuide() {
   ];
 
   return (
-    <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-bn-borderLight dark:border-bn-borderDark bg-white/75 dark:bg-[#18181B]/80 my-10 shadow-sm">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-full bg-bn-gold/15 text-bn-goldDark dark:text-bn-gold flex items-center justify-center">
-          <Calculator size={20} />
+    <div ref={containerRef} className="glass-apple-card p-8 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 my-10 shadow-sm relative overflow-hidden">
+      <div className="flex items-center gap-3.5 mb-6">
+        <div className="w-10 h-10 rounded-full bg-[#E6EDFD] dark:bg-[#6F4E37]/20 border border-[#E5E4E2] dark:border-white/10 text-[#6F4E37] dark:text-[#E6EDFD] flex items-center justify-center shadow-sm">
+          <Calculator size={18} />
         </div>
         <div>
-          <span className="text-xs font-extrabold tracking-widest uppercase text-bn-goldDark dark:text-bn-goldLight block">
+          <span className="text-[11px] font-extrabold tracking-widest uppercase text-[#6F4E37] dark:text-[#C49774] block">
             PRE-PURCHASE ESTIMATOR
           </span>
-          <h2 className="font-cinzel text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100 m-0">
-            Geyser Capacity & Appliance Sizing Guide
+          <h2 className="font-wix text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white m-0 tracking-tight">
+            Geyser Capacity &amp; Appliance Sizing Guide
           </h2>
         </div>
       </div>
@@ -54,24 +83,24 @@ export default function ContactBtuGuide() {
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs sm:text-sm border-collapse">
           <thead>
-            <tr className="border-b border-neutral-300 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400">
-              <th className="py-3 px-2 font-bold text-neutral-900 dark:text-neutral-100">Appliance Category</th>
-              <th className="py-3 px-2 font-bold">Ideal Household / Room Type</th>
-              <th className="py-3 px-2 font-bold text-bn-goldDark dark:text-bn-goldLight">Technical Specification Note</th>
+            <tr className="border-b border-[#E5E4E2] dark:border-white/10 text-slate-500 dark:text-slate-400">
+              <th className="py-3 px-3 font-bold text-slate-900 dark:text-white font-wix">Appliance Category</th>
+              <th className="py-3 px-3 font-bold font-wix">Ideal Household / Room Type</th>
+              <th className="py-3 px-3 font-bold text-[#6F4E37] dark:text-[#C49774] font-wix">Technical Specification Note</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody className="divide-y divide-[#E5E4E2] dark:divide-white/5">
             {sizingData.map((s, idx) => (
-              <tr key={idx} className="hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50">
-                <td className="py-3.5 px-2 font-semibold text-neutral-900 dark:text-neutral-100">{s.appliance}</td>
-                <td className="py-3.5 px-2 text-neutral-600 dark:text-neutral-300">{s.usage}</td>
-                <td className="py-3.5 px-2 text-neutral-500 dark:text-neutral-400 text-xs">{s.recommendation}</td>
+              <tr key={idx} className="hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition-colors">
+                <td className="py-3.5 px-3 font-semibold text-slate-900 dark:text-white font-wix">{s.appliance}</td>
+                <td className="py-3.5 px-3 text-slate-600 dark:text-slate-300">{s.usage}</td>
+                <td className="py-3.5 px-3 text-slate-500 dark:text-slate-400 text-xs">{s.recommendation}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-4 leading-relaxed">
+      <p className="text-xs text-slate-500 dark:text-slate-400 mt-4 leading-relaxed">
         * <strong>Hard Water Advisory:</strong> For areas in Lahore, Rawalpindi, and Karachi with bore water TDS above 300 PPM, we strongly recommend Sapphire Enamel Storage Geysers equipped with magnesium sacrificial anode rods.
       </p>
     </div>

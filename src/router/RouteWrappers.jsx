@@ -72,8 +72,8 @@ export function ProductSlugRoute() {
   if (loading) {
     return (
       <div className="max-w-[1360px] mx-auto px-[5%] py-24 text-center">
-        <div className="w-10 h-10 border-4 border-bn-gold border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-sm text-neutral-500 font-semibold">Loading certified appliance specifications...</p>
+        <div className="w-10 h-10 border-4 border-[#6F4E37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-sm text-slate-500 font-wix font-semibold">Loading certified appliance specifications...</p>
       </div>
     );
   }
@@ -134,18 +134,18 @@ export function DecoyAdminRoute() {
   const navigate = useNavigate();
   return (
     <div className="max-w-[700px] mx-auto px-4 py-28 text-center space-y-4">
-      <span className="font-cinzel text-7xl font-black text-neutral-300 dark:text-neutral-700 block select-none">
+      <span className="font-wix text-7xl font-black text-slate-300 dark:text-neutral-700 block select-none">
         404
       </span>
-      <h2 className="font-cinzel text-xl font-bold text-neutral-800 dark:text-neutral-200 m-0">
+      <h2 className="font-wix text-xl font-bold text-slate-800 dark:text-slate-200 m-0">
         Page Not Found
       </h2>
-      <p className="text-xs text-neutral-500 max-w-sm mx-auto leading-relaxed">
+      <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
         The requested URL was not found on this server. Please check your link or return to the main store.
       </p>
       <button
         onClick={() => navigate({ to: '/' })}
-        className="px-6 py-2.5 rounded-full bg-bn-gold text-white font-bold text-xs hover:bg-bn-goldDark transition-colors shadow-md cursor-pointer"
+        className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 text-white font-bold text-xs transition-all shadow-md cursor-pointer border-none"
       >
         Return to Home Store
       </button>

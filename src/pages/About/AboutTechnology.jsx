@@ -1,7 +1,48 @@
-﻿import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SAFE_SVG_PLACEHOLDER } from '../../services/mockData';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function AboutTechnology() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    ScrollTrigger.refresh();
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.gsap-tech-header',
+        { y: 15, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.45,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+      gsap.fromTo('.gsap-tech-card',
+        { y: 20, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   const techCards = [
     {
       img: 'https://1301029.us21.myftpupload.com/wp-content/uploads/2026/10/geyser-storage.jpg',
@@ -30,12 +71,12 @@ export default function AboutTechnology() {
   ];
 
   return (
-    <div className="mb-14">
-      <div className="text-center max-w-xl mx-auto mb-8">
-        <span className="text-xs font-black tracking-widest uppercase text-bn-goldDark dark:text-bn-goldLight block mb-1">
+    <div ref={containerRef} className="mb-14">
+      <div className="gsap-tech-header text-center max-w-xl mx-auto mb-8">
+        <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#6F4E37] dark:text-[#C49774] block mb-1">
           ENGINEERING BENCHMARKS
         </span>
-        <h2 className="font-cinzel text-2xl sm:text-3xl font-black text-neutral-900 dark:text-neutral-100 m-0">
+        <h2 className="font-wix text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-neutral-100 m-0">
           Precision Technology
         </h2>
       </div>
@@ -44,9 +85,9 @@ export default function AboutTechnology() {
         {techCards.map((t, idx) => (
           <div 
             key={idx} 
-            className="group rounded-3xl overflow-hidden border border-bn-borderLight dark:border-neutral-800 bg-white dark:bg-[#18181B] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
+            className="gsap-tech-card glass-apple-card group rounded-3xl overflow-hidden border border-[#E5E4E2] dark:border-white/10 bg-white/95 dark:bg-[#161311]/95 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
           >
-            <div className="h-44 w-full bg-neutral-900 relative overflow-hidden">
+            <div className="h-44 w-full bg-[#F7F6F4] dark:bg-[#12100E] relative overflow-hidden">
               <img
                 src={t.img}
                 alt={t.title}
@@ -56,15 +97,15 @@ export default function AboutTechnology() {
                 }}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
               />
-              <span className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur-md text-bn-goldLight text-[10px] font-black px-2.5 py-0.5 rounded-full border border-white/10">
+              <span className="absolute top-3 left-3 bg-[#E6EDFD]/90 dark:bg-[#1A1715]/90 backdrop-blur-md text-[#6F4E37] dark:text-[#E6EDFD] text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border border-[#E5E4E2] dark:border-white/10 shadow-xs">
                 {t.badge}
               </span>
             </div>
             <div className="p-4 flex flex-col flex-grow">
-              <h3 className="font-cinzel text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-1 group-hover:text-bn-gold transition-colors">
+              <h3 className="font-wix text-sm font-bold text-neutral-900 dark:text-neutral-100 mb-1 group-hover:text-[#6F4E37] dark:group-hover:text-[#C49774] transition-colors">
                 {t.title}
               </h3>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 m-0 leading-relaxed font-light">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 m-0 leading-relaxed font-normal">
                 {t.desc}
               </p>
             </div>

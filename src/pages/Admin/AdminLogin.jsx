@@ -36,19 +36,19 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl border border-bn-borderLight dark:border-neutral-800 bg-white/90 dark:bg-[#18181B]/95 shadow-2xl backdrop-blur-xl">
+      <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 glass-apple-card shadow-2xl relative overflow-hidden">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-bn-gold/15 text-bn-goldDark dark:text-bn-gold flex items-center justify-center mx-auto mb-4 border border-bn-gold/30 shadow-md">
+          <div className="w-16 h-16 rounded-2xl bg-[#E6EDFD] dark:bg-[#6F4E37]/20 text-[#6F4E37] dark:text-[#E6EDFD] flex items-center justify-center mx-auto mb-4 border border-[#E5E4E2] dark:border-white/10 shadow-sm">
             <ShieldCheck size={32} />
           </div>
-          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-bn-gold/20 border border-bn-gold/40 text-bn-goldDark dark:text-bn-goldLight text-[10px] font-black uppercase tracking-widest mb-2">
-            <Sparkles size={11} className="text-amber-500" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E6EDFD] dark:bg-[#6F4E37]/20 border border-[#E5E4E2] dark:border-white/10 text-[#6F4E37] dark:text-[#E6EDFD] text-[10px] font-black uppercase tracking-widest mb-3">
+            <Sparkles size={11} className="text-[#8C6547]" />
             <span>PROTECTED GATEWAY</span>
           </span>
-          <h1 className="font-cinzel text-2xl sm:text-3xl font-black text-neutral-900 dark:text-neutral-100 m-0">
+          <h1 className="font-wix text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white m-0 tracking-tight">
             Store Command Center
           </h1>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 font-light">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-normal">
             Authorized management portal for orders, catalog, and inventory.
           </p>
         </div>
@@ -68,16 +68,16 @@ export default function AdminLogin() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider font-wix">
               Admin Master Password
             </label>
             <Input.Password
-              prefix={<Lock size={16} className="text-neutral-400 mr-2" />}
+              prefix={<Lock size={16} className="text-slate-400 mr-2" />}
               placeholder="Enter Master Security Passphrase"
               value={password}
               disabled={isLocked}
               onChange={(e) => setPassword(e.target.value)}
-              className="rounded-2xl h-12 px-4 bg-neutral-50 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white"
+              className="rounded-2xl h-12 px-4 border-[#E5E4E2] dark:border-white/10"
             />
           </div>
 
@@ -87,7 +87,7 @@ export default function AdminLogin() {
             loading={loading}
             disabled={isLocked}
             icon={<ArrowRight size={16} />}
-            className="w-full h-12 rounded-2xl font-bold bg-bn-gold hover:bg-bn-goldDark border-none text-white shadow-lg flex items-center justify-center gap-2 text-sm"
+            className="w-full h-12 rounded-full font-bold bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-105 border-none text-white shadow-lg flex items-center justify-center gap-2 text-sm"
           >
             {isLocked ? `Locked (${lockoutRemaining}s)` : 'Unlock Dashboard'}
           </Button>

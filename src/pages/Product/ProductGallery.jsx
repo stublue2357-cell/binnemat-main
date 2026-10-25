@@ -1,27 +1,43 @@
-﻿import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import { SAFE_SVG_PLACEHOLDER } from '../../services/mockData';
 import { ShieldCheck } from 'lucide-react';
 
 export default function ProductGallery({ images, badge, name }) {
   const imageList = images && images.length > 0 ? images : [{ src: SAFE_SVG_PLACEHOLDER }];
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const galleryRef = useRef(null);
+
+  useEffect(() => {
+    const el = galleryRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', clearProps: 'all' }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, [name]);
 
   const currentSrc = imageList[activeImageIndex]?.src || SAFE_SVG_PLACEHOLDER;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div ref={galleryRef} className="flex flex-col gap-4">
       {/* MAIN VIEWPORT WITH LUXURY SHADOW & BADGE */}
-      <div className="glass-panel luxury-card rounded-3xl border-2 border-bn-borderLight dark:border-bn-borderDark bg-neutral-900 p-2 h-[380px] sm:h-[460px] flex items-center justify-center relative overflow-hidden shadow-xl group">
-        <span className="absolute top-4 left-4 z-10 bg-neutral-950/90 text-bn-goldLight border border-bn-gold/40 text-xs font-black px-3.5 py-1 rounded-full shadow-md backdrop-blur-md">
+      <div className="glass-apple-card rounded-3xl border border-[#E5E4E2] dark:border-white/10 bg-[#F7F6F4] dark:bg-[#12100E] p-2 h-[380px] sm:h-[460px] flex items-center justify-center relative overflow-hidden shadow-xl group">
+        <span className="absolute top-4 left-4 z-10 bg-[#E6EDFD]/95 dark:bg-[#1A1715]/95 text-[#6F4E37] dark:text-[#E6EDFD] border border-[#E5E4E2] dark:border-white/10 text-xs font-mono font-bold px-3.5 py-1 rounded-full shadow-md backdrop-blur-md">
           {badge || "100% BRAND SEALED"}
         </span>
 
-        <span className="absolute bottom-4 right-4 z-10 bg-neutral-950/85 text-white border border-white/10 text-[11px] font-bold px-3 py-1 rounded-xl flex items-center gap-1.5 backdrop-blur-md">
-          <ShieldCheck size={14} className="text-bn-gold" />
+        <span className="absolute bottom-4 right-4 z-10 bg-white/90 dark:bg-[#1A1715]/90 text-slate-800 dark:text-slate-200 border border-[#E5E4E2] dark:border-white/10 text-[11px] font-bold px-3 py-1 rounded-xl flex items-center gap-1.5 backdrop-blur-md">
+          <ShieldCheck size={14} className="text-[#6F4E37] dark:text-[#C49774]" />
           <span>Official Warranty Stamped</span>
         </span>
 
-        <div className="w-full h-full rounded-2xl overflow-hidden flex items-center justify-center bg-neutral-900">
+        <div className="w-full h-full rounded-2xl overflow-hidden flex items-center justify-center bg-transparent">
           <img
             src={currentSrc}
             alt={name}
@@ -41,10 +57,10 @@ export default function ProductGallery({ images, badge, name }) {
             <button
               key={idx}
               onClick={() => setActiveImageIndex(idx)}
-              className={`w-20 h-20 rounded-xl overflow-hidden p-1 border-2 transition-all bg-neutral-900 cursor-pointer flex-shrink-0 ${
+              className={`w-20 h-20 rounded-xl overflow-hidden p-1 border-2 transition-all bg-[#F7F6F4] dark:bg-[#1A1715] cursor-pointer flex-shrink-0 ${
                 activeImageIndex === idx
-                  ? 'border-bn-gold shadow-md scale-105'
-                  : 'border-bn-borderLight dark:border-bn-borderDark opacity-70 hover:opacity-100'
+                  ? 'border-[#6F4E37] shadow-md scale-105'
+                  : 'border-[#E5E4E2] dark:border-white/10 opacity-70 hover:opacity-100'
               }`}
             >
               <img

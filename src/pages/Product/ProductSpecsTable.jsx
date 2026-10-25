@@ -1,6 +1,35 @@
-﻿import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ProductSpecsTable({ specs }) {
+  const tableRef = useRef(null);
+
+  useEffect(() => {
+    const el = tableRef.current;
+    if (!el) return;
+
+    ScrollTrigger.refresh();
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(el,
+        { y: 15, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.45,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, [specs]);
+
   const defaultSpecs = {
     "Heating Element / Motor": "Italian Incoloy 840 / Pure Copper 30W BLDC Motor",
     "Material & Finish": "Heavy Sapphire Enamel Tank / 8mm Tempered Glass",
@@ -13,17 +42,17 @@ export default function ProductSpecsTable({ specs }) {
   const finalSpecs = specs && Object.keys(specs).length > 0 ? specs : defaultSpecs;
 
   return (
-    <div className="glass-panel p-6 sm:p-10 rounded-3xl border border-bn-borderLight dark:border-bn-borderDark bg-white/75 dark:bg-[#18181B]/80 my-12 shadow-sm">
+    <div ref={tableRef} className="glass-apple-card p-6 sm:p-10 rounded-3xl border border-[#E5E4E2] dark:border-white/10 bg-white/95 dark:bg-[#1A1715]/95 my-10 shadow-sm">
       <div className="mb-6">
-        <span className="text-xs font-extrabold tracking-widest uppercase text-bn-goldDark dark:text-bn-goldLight block mb-1">
+        <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#6F4E37] dark:text-[#C49774] block mb-1">
           PRECISION ENGINEERING
         </span>
-        <h2 className="font-cinzel text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100 m-0">
+        <h2 className="font-wix text-xl sm:text-2xl font-extrabold text-neutral-900 dark:text-neutral-100 m-0">
           Technical Specifications
         </h2>
       </div>
 
-      <div className="divide-y divide-neutral-200 dark:divide-neutral-800 text-sm">
+      <div className="divide-y divide-[#E5E4E2] dark:divide-white/10 text-sm">
         {Object.entries(finalSpecs).map(([key, value], idx) => (
           <div key={idx} className="py-3.5 grid grid-cols-1 sm:grid-cols-3 gap-2">
             <span className="font-bold text-neutral-800 dark:text-neutral-200">

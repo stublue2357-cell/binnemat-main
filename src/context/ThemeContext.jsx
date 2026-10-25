@@ -1,11 +1,12 @@
-﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ConfigProvider, theme } from 'antd';
 
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('bn_theme') === 'dark';
+    const saved = localStorage.getItem('bn_theme');
+    return saved === 'dark'; // Defaults to false (Light Theme)
   });
 
   useEffect(() => {
@@ -25,11 +26,11 @@ export function ThemeProvider({ children }) {
   const antdThemeConfig = {
     algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
     token: {
-      colorPrimary: '#C49A45',
-      colorLink: '#C49A45',
-      borderRadius: 12,
-      fontFamily: '"Plus Jakarta Sans", sans-serif',
-      colorBgContainer: isDarkMode ? '#18181B' : '#FFFFFF',
+      colorPrimary: '#6F4E37',
+      colorLink: '#6F4E37',
+      borderRadius: 14,
+      fontFamily: '"Wix Madefor Display", "Plus Jakarta Sans", sans-serif',
+      colorBgContainer: isDarkMode ? '#1A1715' : '#FFFFFF',
     },
   };
 

@@ -1,8 +1,47 @@
-﻿import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Collapse } from 'antd';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function FaqAccordion() {
   const [activeTab, setActiveTab] = useState('all');
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    ScrollTrigger.refresh();
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.gsap-faq-tabs',
+        { y: 12, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+      gsap.fromTo('.gsap-faq-card',
+        { y: 18, opacity: 0 },
+        {
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          y: 0,
+          opacity: 1,
+          duration: 0.45,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   const faqData = [
     {
@@ -53,10 +92,24 @@ export default function FaqAccordion() {
     ? faqData 
     : faqData.filter(f => f.category === activeTab);
 
+  const formattedItems = filteredFaqs.map(f => ({
+    key: f.key,
+    label: (
+      <span className="font-wix font-bold text-sm sm:text-base text-slate-900 dark:text-white tracking-tight">
+        {f.label}
+      </span>
+    ),
+    children: (
+      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal m-0 pt-1 pb-2">
+        {f.children}
+      </p>
+    )
+  }));
+
   return (
-    <div className="space-y-6">
+    <div ref={containerRef} className="space-y-6">
       {/* CATEGORY FILTER TABS */}
-      <div className="flex flex-wrap gap-2 justify-center mb-6">
+      <div className="gsap-faq-tabs flex flex-wrap gap-2 justify-center mb-6">
         {[
           { id: 'all', label: 'All Questions' },
           { id: 'warranty', label: 'Official Warranty' },
@@ -69,8 +122,8 @@ export default function FaqAccordion() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 rounded-full text-xs font-bold transition-all border cursor-pointer ${
               activeTab === tab.id
-                ? 'bg-bn-gold text-white border-bn-gold shadow-sm'
-                : 'bg-white/80 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-bn-borderLight dark:border-bn-borderDark hover:border-bn-gold'
+                ? 'bg-gradient-to-r from-[#6F4E37] to-[#8C6547] text-white border-transparent shadow-sm'
+                : 'glass-apple-card text-slate-700 dark:text-slate-300 border-[#E5E4E2] dark:border-white/10 hover:border-[#6F4E37]/50'
             }`}
           >
             {tab.label}
@@ -79,9 +132,9 @@ export default function FaqAccordion() {
       </div>
 
       {/* ACCORDION */}
-      <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-bn-borderLight dark:border-bn-borderDark bg-white/75 dark:bg-[#18181B]/80 shadow-sm">
+      <div className="gsap-faq-card glass-apple-card p-6 sm:p-8 rounded-3xl border border-[#E5E4E2] dark:border-white/10 shadow-sm relative overflow-hidden">
         <Collapse
-          items={filteredFaqs}
+          items={formattedItems}
           defaultActiveKey={['1']}
           bordered={false}
           className="bg-transparent text-sm"

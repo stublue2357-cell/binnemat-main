@@ -1,7 +1,6 @@
-﻿import React, { useState } from 'react';
-import { Button, Input, message } from 'antd';
-import { Sparkles, ArrowRight } from 'lucide-react';
-import { SAFE_SVG_PLACEHOLDER } from '../../services/mockData';
+import React, { useState } from 'react';
+import { message } from 'antd';
+import { Sparkles, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState('');
@@ -9,60 +8,55 @@ export default function NewsletterSection() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email) return;
-    message.success('Thank you for joining the Binnemat Circle!');
+    message.success('Welcome to the Binnemat VIP Circle!');
     setEmail('');
   };
 
   return (
-    <section className="max-w-[1360px] mx-auto px-[5%] mb-14">
-      <div className="relative rounded-3xl overflow-hidden border border-bn-borderLight dark:border-neutral-800 shadow-xl bg-neutral-950">
-        {/* BACKGROUND STUDIO IMAGE */}
-        <div className="h-64 sm:h-72 w-full relative">
-          <img
-            src="https://1301029.us21.myftpupload.com/wp-content/uploads/2026/10/studio-collection.jpg"
-            alt="Binnemat Collection"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = SAFE_SVG_PLACEHOLDER;
-            }}
-            className="w-full h-full object-cover object-center filter brightness-40"
-          />
-          <div className="absolute inset-0 bg-neutral-950/85 backdrop-blur-sm" />
+    <section className="relative px-4 sm:px-6 max-w-4xl mx-auto my-10 text-slate-900 dark:text-white">
+      <div className="glass-apple-card relative rounded-3xl p-8 sm:p-12 border border-[#E5E4E2] dark:border-white/[0.12] bg-white/95 dark:bg-[#161311]/95 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(111,78,55,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)] text-center">
+        {/* Subtle Warm Mocha & Platinum Backlight (No washed-out foggy grey cloud in dark mode) */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[radial-gradient(ellipse_at_top,_rgba(111,78,55,0.12)_0%,_transparent_70%)] dark:bg-[radial-gradient(ellipse_at_top,_rgba(111,78,55,0.25)_0%,_transparent_70%)] pointer-events-none -z-10" />
+
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6EDFD] dark:bg-[#1A1614] border border-[#E5E4E2] dark:border-white/[0.12] text-[#6F4E37] dark:text-[#E5E4E2] text-xs font-mono uppercase tracking-widest mb-4 font-bold shadow-xs">
+          <Sparkles size={13} className="text-[#6F4E37] dark:text-[#C49774]" />
+          <span>Official Updates &amp; Alerts</span>
         </div>
 
-        {/* CONTENT OVERLAY */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-bn-gold/20 border border-bn-gold/40 text-bn-goldLight text-[10px] font-black uppercase tracking-widest mb-2 backdrop-blur-md">
-            <Sparkles size={11} className="text-amber-400" />
-            <span>VIP APPLIANCE CIRCLE</span>
+        <h2 className="font-wix font-black text-2xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white mb-3 tracking-tight">
+          Never Miss Factory Inlets &amp; Drops.
+        </h2>
+
+        <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-md mx-auto mb-8 font-normal leading-relaxed">
+          Pre-winter geyser drops, seasonal BLDC energy blueprints, and certified manufacturer warranty updates.
+        </p>
+
+        {/* REFINED INPUT CAPSULE */}
+        <form onSubmit={handleSubmit} className="flex items-center justify-between p-1.5 rounded-full bg-[#F7F6F4] dark:bg-[#0A0908] border border-[#E5E4E2] dark:border-white/[0.15] backdrop-blur-2xl max-w-md mx-auto shadow-sm focus-within:border-[#6F4E37] focus-within:ring-2 focus-within:ring-[#6F4E37]/20 transition-all">
+          <input 
+            type="email" 
+            placeholder="Enter your email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="bg-transparent border-none outline-none px-4 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 flex-grow font-wix"
+          />
+          <button
+            type="submit"
+            className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#6F4E37] to-[#8C6547] hover:brightness-110 text-white font-bold text-xs tracking-wide transition-all shadow-[0_4px_16px_rgba(111,78,55,0.35)] flex items-center gap-1.5 cursor-pointer border-none flex-shrink-0"
+          >
+            <span>Subscribe</span>
+            <ArrowUpRight size={14} />
+          </button>
+        </form>
+
+        <div className="flex items-center justify-center gap-6 mt-6 text-[11px] text-slate-500 dark:text-slate-400 font-mono font-medium">
+          <span className="flex items-center gap-1">
+            <CheckCircle2 size={12} className="text-[#6F4E37] dark:text-[#C49774]" /> Zero spam
           </span>
-
-          <h2 className="font-cinzel text-2xl sm:text-3xl font-black text-white m-0 mb-2 drop-shadow">
-            Priority Access & Seasonal Savings
-          </h2>
-
-          <p className="text-xs sm:text-sm text-neutral-300 max-w-md m-0 mb-5 leading-relaxed font-light drop-shadow">
-            Pre-winter geyser discounts, BLDC energy guides, and factory warranty updates.
-          </p>
-
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 w-full max-w-md">
-            <Input 
-              type="email" 
-              placeholder="Enter your email or phone number"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="rounded-full h-11 px-5 bg-white/10 border-white/20 text-white placeholder-neutral-400 focus:border-bn-gold backdrop-blur-md"
-            />
-            <Button 
-              type="primary" 
-              htmlType="submit"
-              icon={<ArrowRight size={15} />}
-              className="rounded-full h-11 px-7 font-bold bg-bn-gold hover:bg-bn-goldDark border-none text-white shadow-lg flex items-center justify-center gap-1.5"
-            >
-              Join Circle
-            </Button>
-          </form>
+          <span className="flex items-center gap-1">
+            <CheckCircle2 size={12} className="text-[#6F4E37] dark:text-[#C49774]" /> Official warranty alerts
+          </span>
         </div>
       </div>
     </section>

@@ -14,6 +14,7 @@
     "@tanstack/react-router": "^1.170.45",
     "antd": "^6.6.7",
     "autoprefixer": "^10.6.1",
+    "gsap": "^3.15.0",
     "lucide-react": "^1.61.0",
     "postcss": "^8.5.31",
     "react": "^19.3.1",
