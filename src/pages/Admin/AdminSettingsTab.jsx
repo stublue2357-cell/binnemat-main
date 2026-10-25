@@ -20,11 +20,13 @@ export default function AdminSettingsTab() {
 
   const handleSaveKeys = (e) => {
     e.preventDefault();
-    if (!ck || !cs) {
+    const cleanKey = (ck || '').trim();
+    const cleanSecret = (cs || '').trim();
+    if (!cleanKey || !cleanSecret) {
       message.error('Please enter both Consumer Key and Consumer Secret');
       return;
     }
-    const ok = updateApiKeys(ck, cs);
+    const ok = updateApiKeys(cleanKey, cleanSecret);
     if (wpUser) localStorage.setItem('binnemat_wp_user', wpUser.trim());
     if (wpAppPass) localStorage.setItem('binnemat_wp_app_pass', wpAppPass.trim());
 
@@ -35,14 +37,18 @@ export default function AdminSettingsTab() {
   };
 
   const handleTestConnection = async () => {
-    if (ck && cs) {
-      updateApiKeys(ck, cs);
+    const cleanKey = (ck || '').trim();
+    const cleanSecret = (cs || '').trim();
+    if (!cleanKey || !cleanSecret) {
+      message.warning('Please enter both Consumer Key and Consumer Secret first.');
+      return;
     }
+    updateApiKeys(cleanKey, cleanSecret);
     setTesting(true);
     try {
-      const orders = await fetchAdminOrders();
+      const res = await fetchAdminProducts(1, { skipCache: true });
       setConnectionStatus('connected');
-      message.success(`Successfully connected to WooCommerce! Found ${orders.length} orders.`);
+      message.success('Successfully connected to WooCommerce live database!');
     } catch (err) {
       setConnectionStatus('error');
       message.error(`Connection failed: ${err.message}`, 6);

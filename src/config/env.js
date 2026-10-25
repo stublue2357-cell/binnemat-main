@@ -1,18 +1,16 @@
 // Application Environment Configuration (12-Factor App)
 function resolveWpApiUrl() {
-  const envUrl = import.meta.env.VITE_WP_API_URL || 'https://api.binnemat.com/wp-json/wc/store/v1';
-  if (import.meta.env.DEV) {
-    return '/api-wc';
+  if (import.meta.env.VITE_WP_API_URL) {
+    return import.meta.env.VITE_WP_API_URL.replace(/([^:])\/\//g, '$1/');
   }
-  return envUrl.replace(/([^:])\/\//g, '$1/');
+  return '/api-wc';
 }
 
 function resolveWcV3ApiUrl() {
-  const envUrl = import.meta.env.VITE_WC_V3_URL || 'https://api.binnemat.com/wp-json/wc/v3';
-  if (import.meta.env.DEV) {
-    return '/api-wc-v3';
+  if (import.meta.env.VITE_WC_V3_URL) {
+    return import.meta.env.VITE_WC_V3_URL.replace(/([^:])\/\//g, '$1/');
   }
-  return envUrl.replace(/([^:])\/\//g, '$1/');
+  return '/api-wc-v3';
 }
 
 export const APP_CONFIG = Object.freeze({
